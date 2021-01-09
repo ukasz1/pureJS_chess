@@ -33,13 +33,20 @@ body{
 
 .row{}
 
-
-
 .chess-field{
 	height: 80px;
 	width: 80px;
 	border: 0px solid black;
 	box-sizing: border-box;
+}
+
+.chess-field > img{
+	height: 66px;
+	width: 66px;
+	
+	position: relative;
+	top: 7px;
+	left: 8px;
 }
 
 .color1{
@@ -49,3 +56,5 @@ body{
 .color2{
 	background-color: rgb(118,150,86);
 }
+
+
