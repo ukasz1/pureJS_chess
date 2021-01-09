@@ -1,0 +1,51 @@
+body{
+	margin: 0;
+	background-color: #333333;
+	
+}
+
+.top-div{
+	height:50px;
+}
+
+.chessboard-area{
+	position: relative;
+	background-color: white;
+	height: 650px;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+.chessboard-basis{
+	position: absolute;
+	margin: auto;
+	top: 0;  
+	right: 0;  
+	bottom: 0;  
+	left: 0;
+	
+	
+	height: 640px;
+	width: 640px;
+	border: 3px solid #333333;
+	background-color: #333333;
+}
+
+.row{}
+
+
+
+.chess-field{
+	height: 80px;
+	width: 80px;
+	border: 0px solid black;
+	box-sizing: border-box;
+}
+
+.color1{
+	background-color: rgb(238,238,210);
+}
+
+.color2{
+	background-color: rgb(118,150,86);
+}
