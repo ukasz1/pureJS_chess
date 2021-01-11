@@ -10,7 +10,7 @@ body{
 
 .chessboard-area{
 	position: relative;
-	background-color: white;
+	background-color: #111111;
 	height: 650px;
 	margin: 0 auto;
 	border: 1px solid black;
@@ -38,13 +38,14 @@ body{
 	width: 80px;
 	border: 0px solid black;
 	box-sizing: border-box;
+	position: relative;
 }
 
 .chess-field > img{
 	height: 66px;
 	width: 66px;
 	
-	position: relative;
+	position: absolute;
 	top: 7px;
 	left: 8px;
 }
@@ -57,4 +58,8 @@ body{
 	background-color: rgb(118,150,86);
 }
 
+.chess-field-marked{
+	/*border: 4px solid black; - problem obrazek przesuwa się z obramowaniem*/
+	background-color: rgb(32,104,23);
+}
 
