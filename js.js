@@ -17,3 +17,26 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 
 console.log(chessboard);
 
+
+function zaznaczenie(e){	//funkcja zaznaczająca pole szachowe
+	var el;
+	
+	el=e.target;	//pobranie węzła obiektu zdarzenia
+	
+	if(el.hasAttribute('class')){						//czy kliknięto diva (a nie obszar img)?
+		el.classList.toggle('chess-field-marked');
+	}
+	else{
+		el=el.parentNode;								//jeśli kliknięto obszar img to węzłem obiektu zdarzenia jest rodzic (div)
+		el.classList.toggle('chess-field-marked');
+	}
+}
+
+var pole=document.getElementsByClassName('chess-field');
+
+for(let i=0; i<64;i++){
+	pole[i].addEventListener('click', zaznaczenie, true);}
+
+
+
+
