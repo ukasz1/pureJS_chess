@@ -24,11 +24,20 @@ function zaznaczenie(e){	//funkcja zaznaczająca pole szachowe
 	el=e.target;	//pobranie węzła obiektu zdarzenia
 	
 	if(el.hasAttribute('class')){						//czy kliknięto diva (a nie obszar img)?
-		el.classList.toggle('chess-field-marked');
 	}
 	else{
 		el=el.parentNode;								//jeśli kliknięto obszar img to węzłem obiektu zdarzenia jest rodzic (div)
-		el.classList.toggle('chess-field-marked');
+	}
+	
+	
+	var chessFieldColor;
+	chessFieldColor=el.className[17];
+	
+	if(chessFieldColor==='2'){							//klasa color1 czy color2?
+		el.classList.toggle('chess-field-marked-green');
+	}
+	else{
+		el.classList.toggle('chess-field-marked-white');
 	}
 }
 
