@@ -17,13 +17,18 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 
 console.log(chessboard);
 
-var firstClick;
+var clickAddress;
 var secondClick;
-var clickNo=-1;
+var clickNo=0;			//numer kliknięcia: 0 - pierwsze, 1 - drugie
+var selectedChessPiece;	//przenoszona figura
+var i1, j1, i2, j2;
+
+var clickAddressFrom;
+var clickAddressTo;
 
 function marking(e){	//funkcja zaznaczająca pole szachowe
 	
-	clickNo++;
+	
 	var el;
 	
 	el=e.target;	//pobranie węzła obiektu zdarzenia
@@ -35,7 +40,7 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 	}
 	
 	
-	var chessFieldColor;
+/*	var chessFieldColor;
 	chessFieldColor=el.className[17];
 	
 	if(chessFieldColor==='2'){							// color1 czy color2?
@@ -44,43 +49,104 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 	else{
 		el.classList.toggle('chess-field-marked-white');
 	}
-	
-	if(clickNo%2==0){		//kliknięcie pierwszego pola
-		firstClick=el.id;
+*/	
+	if(clickNo%2==0){
+		/*
+			KLIKNIĘCIE PIERWSZEGO POLA
+		*/
 		
-		console.log(firstClick);
-		console.log(clickNo);
+		clickAddress=el.id;
 		
-		var iIndex=firstClick.charCodeAt(0);	//dekodowanie adresu szachowego celem pobrania indexów
-		var jIndex=firstClick.charCodeAt(1);
+		console.log('clickAddress: '+ clickAddress);
+		console.log('clickNo: ' + clickNo);
 		
-		let i=0;
+		var iIndex=clickAddress.charCodeAt(0);	//dekodowanie adresu szachowego celem pobrania indexów
+		var jIndex=clickAddress.charCodeAt(1);
+		
+		i1=0;
 		
 		do{
-			if(56-i!=jIndex)	//56 - kod ASCII dla znaku '0'
-				i++;
+			if(56-i1!=jIndex)	//56 - kod ASCII dla znaku '0'
+				i1++;
 			else
 				break;
 		} while(true);
 		
-		let j=0;
+		j1=0;
 		
 		do{
-			if(j+97!=iIndex)	//97 - kod ASCII dla znaku 'a'
-				j++;
+			if(j1+97!=iIndex)	//97 - kod ASCII dla znaku 'a'
+				j1++;
 			else
 				break;
 		} while(true);
 		
-		chessboard[i][j]=null;	//sprawdzenie
+		if(chessboard[i1][j1]!=null){
+			selectedChessPiece=chessboard[i1][j1];	//pobranie figury
+			clickNo++;								//kliknięcie zakończone sukcesem
+			console.log('Pierwszy klik OK');
+		}
+		else{
+			console.log('Pierwszy klik ERROR');
+		}
+
+		//chessboard[i][j]=null;	//sprawdzenie
 				
 	}
 	else{
 		/*
-		
-		//KLIKNIĘCIE DRUGIEGO POLA
-		
+			KLIKNIĘCIE DRUGIEGO POLA
 		*/
+		
+		clickAddress=el.id;
+		
+		console.log('clickAddress: '+ clickAddress);
+		console.log('clickNo: ' + clickNo);
+
+		
+		iIndex=clickAddress.charCodeAt(0);
+		jIndex=clickAddress.charCodeAt(1);
+		
+		i2=0;
+		
+		do{
+			if(56-i2!=jIndex)	//56 - kod ASCII dla znaku '0'
+				i2++;
+			else
+				break;
+		} while(true);
+		
+		j2=0;
+		
+		do{
+			if(j2+97!=iIndex)	//97 - kod ASCII dla znaku 'a'
+				j2++;
+			else
+				break;
+		} while(true);
+		
+		if(chessboard[i2][j2]==null){
+			chessboard[i2][j2]=selectedChessPiece;
+			chessboard[i1][j1]=null;
+			clickNo++;
+			console.log('Drugi klik OK');
+			
+			/*
+			Ponowne zakodowanie indeksów na adresy i aktualizacja drzewa DOM (widoku szachownicy)
+			*/
+			
+		}
+		else{
+			console.log('Drugi klik ERROR');
+			clickNo--;
+		}
+		
+		// 1. Czy wybrane pole nie jest zajęte przez figurę tego samego gracza?
+		// 2. Czy wybrane pole jest osiągalne dla zaznaczonej figury?
+		// 3. Czy na drodze figury nie stoi inna figura? (nie dotyczy skoczka)
+		
+		
+		
 	}
 	console.log(chessboard);
 	
