@@ -21,10 +21,13 @@ var clickAddress;
 var secondClick;
 var clickNo=0;			//numer kliknięcia: 0 - pierwsze, 1 - drugie
 var selectedChessPiece;	//przenoszona figura
+var selectedChessImg;
 var i1, j1, i2, j2;
 
 var clickAddressFrom;
 var clickAddressTo;
+
+var moving
 
 function marking(e){	//funkcja zaznaczająca pole szachowe
 	
@@ -55,13 +58,13 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 			KLIKNIĘCIE PIERWSZEGO POLA
 		*/
 		
-		clickAddress=el.id;
+		clickAddressFrom=el.id;
 		
-		console.log('clickAddress: '+ clickAddress);
+		console.log('clickAddressFrom: '+ clickAddressFrom);
 		console.log('clickNo: ' + clickNo);
 		
-		var iIndex=clickAddress.charCodeAt(0);	//dekodowanie adresu szachowego celem pobrania indexów
-		var jIndex=clickAddress.charCodeAt(1);
+		var iIndex=clickAddressFrom.charCodeAt(0);	//dekodowanie adresu szachowego celem pobrania indexów
+		var jIndex=clickAddressFrom.charCodeAt(1);
 		
 		i1=0;
 		
@@ -81,7 +84,7 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 				break;
 		} while(true);
 		
-		if(chessboard[i1][j1]!=null){
+		if(chessboard[i1][j1]!=null){				//SUKCES
 			selectedChessPiece=chessboard[i1][j1];	//pobranie figury
 			clickNo++;								//kliknięcie zakończone sukcesem
 			console.log('Pierwszy klik OK');
@@ -98,14 +101,21 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 			KLIKNIĘCIE DRUGIEGO POLA
 		*/
 		
-		clickAddress=el.id;
+		// 1. Czy wybrane pole nie jest zajęte przez figurę tego samego gracza?
 		
-		console.log('clickAddress: '+ clickAddress);
+		
+		
+		// 2. Czy wybrane pole jest osiągalne dla zaznaczonej figury?
+		// 3. Czy na drodze figury nie stoi inna figura? (nie dotyczy skoczka)
+		
+		clickAddressTo=el.id;
+		
+		console.log('clickAddressTo: '+ clickAddressTo);
 		console.log('clickNo: ' + clickNo);
 
 		
-		iIndex=clickAddress.charCodeAt(0);
-		jIndex=clickAddress.charCodeAt(1);
+		iIndex=clickAddressTo.charCodeAt(0);
+		jIndex=clickAddressTo.charCodeAt(1);
 		
 		i2=0;
 		
@@ -132,8 +142,15 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 			console.log('Drugi klik OK');
 			
 			/*
-			Ponowne zakodowanie indeksów na adresy i aktualizacja drzewa DOM (widoku szachownicy)
+			Aktualizacja drzewa DOM
 			*/
+			selectedChessImg=document.getElementById(clickAddressFrom).innerHTML;
+			
+			document.getElementById(clickAddressFrom).innerHTML='';
+			
+			document.getElementById(clickAddressTo).innerHTML=selectedChessImg;
+			
+			
 			
 		}
 		else{
@@ -141,9 +158,7 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 			clickNo--;
 		}
 		
-		// 1. Czy wybrane pole nie jest zajęte przez figurę tego samego gracza?
-		// 2. Czy wybrane pole jest osiągalne dla zaznaczonej figury?
-		// 3. Czy na drodze figury nie stoi inna figura? (nie dotyczy skoczka)
+
 		
 		
 		
