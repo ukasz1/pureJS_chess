@@ -15,7 +15,7 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 				 [	'wR',	'wN',	'wB',	'wQ',	'wK',	'wB',	'wN',	'wR']];
 
 
-console.log(chessboard);
+// console.log(chessboard);
 
 var clickAddress;
 var secondClick;
@@ -27,7 +27,8 @@ var i1, j1, i2, j2;
 var clickAddressFrom;
 var clickAddressTo;
 
-var moving
+var shouldBeColor='w';	//kolor którego ruch jest oczekiwany; w - white, b - black
+var previousColor;
 
 function marking(e){	//funkcja zaznaczająca pole szachowe
 	
@@ -58,10 +59,16 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 			KLIKNIĘCIE PIERWSZEGO POLA
 		*/
 		
+		
+		
 		clickAddressFrom=el.id;
 		
 		console.log('clickAddressFrom: '+ clickAddressFrom);
-		console.log('clickNo: ' + clickNo);
+		
+		
+		
+		
+		
 		
 		var iIndex=clickAddressFrom.charCodeAt(0);	//dekodowanie adresu szachowego celem pobrania indexów
 		var jIndex=clickAddressFrom.charCodeAt(1);
@@ -84,15 +91,35 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 				break;
 		} while(true);
 		
-		if(chessboard[i1][j1]!=null){				//SUKCES
-			selectedChessPiece=chessboard[i1][j1];	//pobranie figury
-			clickNo++;								//kliknięcie zakończone sukcesem
-			console.log('Pierwszy klik OK');
+		if(chessboard[i1][j1]==null){	//kliknięto puste pole
+			//console.clear();
+			console.log('clickNo: ' + clickNo);
+			console.log('Pierwszy klik');
+			console.log('Error 0 - zaznaczono puste pole');
+			console.log('==========================================');
+			
 		}
+		
 		else{
-			console.log('Pierwszy klik ERROR');
-		}
+			if(chessboard[i1][j1][0]==shouldBeColor){
+			
+															//SUKCES
+					selectedChessPiece=chessboard[i1][j1];	//pobranie figury
+					clickNo++;								//kliknięcie zakończone sukcesem
+					//console.clear();
+					console.log('clickNo: ' + clickNo);
+					console.log('Pierwszy klik OK');
+					console.log('==========================================');
+			}
+			else{
+				//console.clear();
+				console.log('clickNo: ' + clickNo);
+				console.log('Pierwszy klik - błędny kolor');
+				console.log('Error 1 - niewłaściwy gracz');
+				console.log('==========================================');
 
+			}
+		}
 		//chessboard[i][j]=null;	//sprawdzenie
 				
 	}
@@ -111,7 +138,6 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 		clickAddressTo=el.id;
 		
 		console.log('clickAddressTo: '+ clickAddressTo);
-		console.log('clickNo: ' + clickNo);
 
 		
 		iIndex=clickAddressTo.charCodeAt(0);
@@ -135,27 +161,48 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 				break;
 		} while(true);
 		
-		if(chessboard[i2][j2]==null){
+		if(chessboard[i2][j2]==null || chessboard[i2][j2][0]!=shouldBeColor){
+			
+			
 			chessboard[i2][j2]=selectedChessPiece;
 			chessboard[i1][j1]=null;
+			
+			if(shouldBeColor=='w'){	//zamiana aktywnego gracza, tj. oczekiwanego koloru do kliknięcia
+				shouldBeColor='b';
+			}
+			else{
+				shouldBeColor='w';
+			}
+
 			clickNo++;
-			console.log('Drugi klik OK');
+			
+			//console.clear();
+			console.log('clickNo: ' + clickNo);
+			console.log('Poprawny ruch');
+			console.log('==========================================');
 			
 			/*
 			Aktualizacja drzewa DOM
 			*/
+			
 			selectedChessImg=document.getElementById(clickAddressFrom).innerHTML;
 			
 			document.getElementById(clickAddressFrom).innerHTML='';
-			
 			document.getElementById(clickAddressTo).innerHTML=selectedChessImg;
 			
+			//----
 			
 			
 		}
 		else{
-			console.log('Drugi klik ERROR');
+			
+			//console.clear();
 			clickNo--;
+			console.log('clickNo: ' + clickNo);
+			console.log('Drugi klik');
+			console.log('Error 2 - Nie można zbijać swoich figur!');
+			
+			console.log('==========================================');
 		}
 		
 
@@ -163,8 +210,8 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 		
 		
 	}
-	console.log(chessboard);
 	
+// console.log(chessboard); 
 }
 
 var pole=document.getElementsByClassName('chess-field');
