@@ -105,7 +105,7 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 			
 					console.clear
 					
-					movesAllowedArray=rook(i1,j1,chessboard);
+					movesAllowedArray=bishop(i1,j1,chessboard);
 
 					
 					selectedChessPiece=chessboard[i1][j1];	//pobranie figury
@@ -336,7 +336,98 @@ function rook(i1,j1,chessboard){
 return tab;
 
 } 
+//-----------------------------------------------------------------------------------------------------
+function bishop(i1,j1,chessboard){
+	var tab = [];
+	
+	//Sprawdzenie istnienia pól szachowych
+	var mtr=1;
+	console.log('Funkcja goniec');
+	
+	while(i1+mtr<8){
+		if(chessboard[i1+mtr][j1+mtr]==null){
+			tab.push([i1+mtr,j1+mtr]);
+		}
+		else{
+			console.log('Koniec funkcji');
+			
+			if(tab.length!=0){
+			//	console.log('tab =');
+			//	console.log(tab);
+			}
+			else
+				console.log('Brak ruchów prawo-dół');
+			
+			break;
+		}
+		mtr++;
+	}
+	
+	mtr=1;
+	
+	while(i1+mtr<8){
+		if(chessboard[i1+mtr][j1-mtr]==null){
+			tab.push([i1+mtr,j1-mtr]);
+		}
+		else{
 
+			
+			if(tab.length!=0){
+
+			}
+			else
+				console.log('Brak ruchów lewo-dół');
+			
+			break;
+		}
+		mtr++;
+	}
+	
+	mtr=1;
+	
+	while(i1-mtr>=0){
+		if(chessboard[i1-mtr][j1+mtr]==null){
+			tab.push([i1-mtr,j1+mtr]);
+		}
+		else{
+
+			
+			if(tab.length!=0){
+
+			}
+			else
+				console.log('Brak ruchów góra-prawo');
+			
+			break;
+		}
+		mtr++;
+	}
+	
+	mtr=1;
+	
+	while(i1-mtr>=0){
+		if(chessboard[i1-mtr][j1-mtr]==null){
+			tab.push([i1-mtr,j1-mtr]);
+		}
+		else{
+
+			
+			if(tab.length!=0){
+
+			}
+			else
+				console.log('Brak ruchów góra-lewo');
+			
+			break;
+		}
+		mtr++;
+	}
+	
+
+	console.log(tab);
+return tab;
+
+}
 
 
 
