@@ -45,17 +45,6 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 		el=el.parentNode;								//jeśli kliknięto obszar img to węzłem obiektu zdarzenia jest rodzic (div)
 	}
 	
-	
-/*	var chessFieldColor;
-	chessFieldColor=el.className[17];
-	
-	if(chessFieldColor==='2'){							// color1 czy color2?
-		el.classList.toggle('chess-field-marked-green');
-	}
-	else{
-		el.classList.toggle('chess-field-marked-white');
-	}
-*/	
 	if(clickNo%2==0){
 		/*
 			KLIKNIĘCIE PIERWSZEGO POLA
@@ -64,12 +53,7 @@ function marking(e){	//funkcja zaznaczająca pole szachowe
 		clickAddressFrom=el.id;
 		
 		console.log('clickAddressFrom: '+ clickAddressFrom);
-		
-		
-		
-		
-		
-		
+				
 		var iIndex=clickAddressFrom.charCodeAt(0);	//dekodowanie adresu szachowego celem pobrania indexów
 		var jIndex=clickAddressFrom.charCodeAt(1);
 		
@@ -426,7 +410,16 @@ function bishop(i1,j1,chessboard){
 	return tab;
 }
 
-
+/*	var chessFieldColor;
+	chessFieldColor=el.className[17];
+	
+	if(chessFieldColor==='2'){							// color1 czy color2?
+		el.classList.toggle('chess-field-marked-green');
+	}
+	else{
+		el.classList.toggle('chess-field-marked-white');
+	}
+*/	
 
 
 
