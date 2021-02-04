@@ -15,6 +15,7 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 
 
 // console.log(chessboard);
+
 //-------------------------------------------FUNKCJA PODŚWIETLAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
 
 var clickNo=0;			//numer kliknięcia: 0 - pierwsze, 1 - drugie
@@ -34,44 +35,39 @@ function funcTarget(e){
 
 //---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
 
-function marking1(e){	
+function markingFirst(e){	
 	
 	
-	var el = funcTarget(e); 
+	var el = funcTarget(e);   
 	
 	var chessFieldColor;
 	chessFieldColor=el.className[17];
 	
-	if(chessFieldColor==='2'){							// color1 czy color2?
+	if(chessFieldColor==='2'){								// color1 czy color2?
 		el.classList.toggle('chess-field-marked-green');
 	}
 	else{
 		el.classList.toggle('chess-field-marked-white');
 	}
 	
+	
+	
 	if(clickNo%2==0){
-		/*
-			KLIKNIĘCIE PIERWSZEGO POLA
-		*/
-		
-		
-				
+		console.log('Kliknięcie nr 1');
+		clickNo++;
 	}
-	
 	else{
-		/*
-			KLIKNIĘCIE DRUGIEGO POLA
-		*/
-	
-	
+		console.log('Kliknięcie nr 2');
+		clickNo++;
 	}
 	
 }
 
+
 var pole=document.getElementsByClassName('chess-field');
 
 for(let i=0; i<64;i++){
-	pole[i].addEventListener('click', marking1, true);	
+	pole[i].addEventListener('mousedown', markingFirst, false);	
 	}
 
 
