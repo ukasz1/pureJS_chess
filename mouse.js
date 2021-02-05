@@ -14,7 +14,12 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 				 
 
 
-// console.log(chessboard);
+ console.log(chessboard);
+ 	var taken;
+	var given
+	
+	var rowFirst;
+	var columnFirst;
 
 //-------------------------------------------FUNKCJA PODŚWIETLAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
 
@@ -31,6 +36,7 @@ function funcTarget(e){
 	}
 	
 	return el;
+
 }
 
 //---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
@@ -39,35 +45,88 @@ function markingFirst(e){
 	
 	
 	var el = funcTarget(e);   
+	console.log('Przed' + el);
 	
-	var chessFieldColor;
-	chessFieldColor=el.className[17];
 	
-	if(chessFieldColor==='2'){								// color1 czy color2?
-		el.classList.toggle('chess-field-marked-green');
+	coloring(el);
+	
+	e.preventDefault();
+	
+	rowFirst = el.id[6];
+	columnFirst = el.id[7];
+	
+	taken=chessboard[rowFirst][columnFirst];
+}
+
+function markingSecond(e){	
+	
+	
+	var el = funcTarget(e);   
+	
+	coloring(el);
+	
+	chessboard[el.id[6]][el.id[7]]=taken;
+	chessboard[rowFirst][columnFirst]=null;
+	
+	console.log(chessboard);
+	
+}
+
+
+
+
+function checkingHighlights(){
+	var highlightsNo=0;
+	var highlightCoordinates = [];
+	
+	var pole=document.getElementsByClassName('chess-field');
+	for(let i=0; i<64; i++){
+		if(pole[i].className.length>18){
+			highlightsNo++;
+			
+			highlightCoordinates.push(highlightsNo);
+			highlightCoordinates.push(pole[i].id[0]);
+			highlightCoordinates.push(pole[i].id[1]);
+		}	
+		
+		
+		
+		
+		
+		
 	}
-	else{
-		el.classList.toggle('chess-field-marked-white');
-	}
 	
-	
-	
-	if(clickNo%2==0){
-		console.log('Kliknięcie nr 1');
-		clickNo++;
-	}
-	else{
-		console.log('Kliknięcie nr 2');
-		clickNo++;
-	}
-	
+	return highlightCoordinates;
 }
 
 
 var pole=document.getElementsByClassName('chess-field');
 
 for(let i=0; i<64;i++){
-	pole[i].addEventListener('mousedown', markingFirst, false);	
+	pole[i].addEventListener('mousedown', function(e){markingFirst(e);}, false);
+	pole[i].addEventListener('mouseup', function(e){markingSecond(e);}, false);
 	}
 
+//---------------------------- KOLOROWANIE PÓL --------------------------------------------------
+function coloring(arg){
+	var chessFieldColor;
+	chessFieldColor=arg.className[17];
+	
+	
+	if(chessFieldColor==='2'){								// color1 czy color2?
+		arg.classList.toggle('chess-field-marked-green');
+	}
+	else{
+		arg.classList.toggle('chess-field-marked-white');
+	}
+}
 
+{
+var a =5;
+
+
+
+{
+	
+}
+}
