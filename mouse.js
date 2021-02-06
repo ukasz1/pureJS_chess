@@ -18,8 +18,9 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
  	var taken;
 	var given
 	
-	var rowFirst;
-	var columnFirst;
+	var pieceAddressI;
+	var pieceAddressJ;
+	var highlightCoordinates = [];
 
 //-------------------------------------------FUNKCJA PODŚWIETLAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
 
@@ -39,36 +40,38 @@ function funcTarget(e){
 
 }
 
-//---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
+//---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE, pobiera figurę-----------------------------------------------------------------------------
 
 function markingFirst(e){	
 	
 	
 	var el = funcTarget(e);   
-	console.log('Przed' + el);
-	
 	
 	coloring(el);
 	
 	e.preventDefault();
 	
-	rowFirst = el.id[6];
-	columnFirst = el.id[7];
+	pieceAddressI = el.id[6];
+	pieceAddressJ = el.id[7];
 	
-	taken=chessboard[rowFirst][columnFirst];
+	taken=chessboard[pieceAddressI][pieceAddressJ];
+	
+
 }
+//--------------------------------------------FUNKCJA OPUSZCZAJĄCA FIGURĘ-----------------------------------------------------------------------------------------------------
 
 function markingSecond(e){	
 	
 	
 	var el = funcTarget(e);   
-	
 	coloring(el);
 	
 	chessboard[el.id[6]][el.id[7]]=taken;
-	chessboard[rowFirst][columnFirst]=null;
+	chessboard[pieceAddressI][pieceAddressJ]=null;
 	
 	console.log(chessboard);
+	
+	checkingHighlights();	//kasuje podświetlenie poprzedniego ruchu
 	
 }
 
@@ -76,30 +79,25 @@ function markingSecond(e){
 
 
 function checkingHighlights(){
-	var highlightsNo=0;
-	var highlightCoordinates = [];
+	
+	if(highlightCoordinates.length>0){
+		
+		highlightCoordinates=[];
+	}
 	
 	var pole=document.getElementsByClassName('chess-field');
 	for(let i=0; i<64; i++){
 		if(pole[i].className.length>18){
-			highlightsNo++;
 			
-			highlightCoordinates.push(highlightsNo);
-			highlightCoordinates.push(pole[i].id[0]);
-			highlightCoordinates.push(pole[i].id[1]);
-		}	
-		
-		
-		
-		
-		
-		
+			highlightCoordinates.push(pole[i].id[6]);
+			highlightCoordinates.push(pole[i].id[7]);
+		}		
 	}
 	
-	return highlightCoordinates;
+	console.log(highlightCoordinates);
 }
 
-
+//----------------------------------------------------------------------------------------------
 var pole=document.getElementsByClassName('chess-field');
 
 for(let i=0; i<64;i++){
@@ -121,12 +119,14 @@ function coloring(arg){
 	}
 }
 
-{
-var a =5;
 
 
 
-{
-	
-}
-}
+
+
+
+
+
+
+
+
