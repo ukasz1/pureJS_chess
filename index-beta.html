@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- <<link rel="stylesheet" href="css/bootstrap.css"> 	<!-- dodanie Bootstrapa -->
+	
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="media.css" rel="stylesheet" type="text/css" />
+	
+	
+    <title>Szachy</title>
+   
+</head>
+
+<body>
+
+<div class="top-div"></div>
+
+<div class="chessboard-area">
+	<div class="chessboard-basis">
+		<div class="row row-first" style="display: flex; justify-content: center;">
+			<div class="chess-field color1" id="field-00"><img src="figuryszachowe/b_rook.png" /></div>
+			<div class="chess-field color2" id="field-01"><img src="figuryszachowe/b_horse.png" /></div>
+			<div class="chess-field color1" id="field-02"><img src="figuryszachowe/b_bishop.png" /></div>
+			<div class="chess-field color2" id="field-03"><img src="figuryszachowe/b_queen.png" /></div>
+			<div class="chess-field color1" id="field-04"><img src="figuryszachowe/b_king.png" /></div>
+			<div class="chess-field color2" id="field-05"><img src="figuryszachowe/b_bishop.png" /></div>
+			<div class="chess-field color1" id="field-06"><img src="figuryszachowe/b_horse.png" /></div>
+			<div class="chess-field color2" id="field-07"><img src="figuryszachowe/b_rook.png" /></div>
+		</div>
+		
+		<div class="row" style="display: flex; justify-content: center;">
+			<div class="chess-field color2" id="field-10"><img src="figuryszachowe/b_pawn.png" /></div>
+			<div class="chess-field color1" id="field-11"><img src="figuryszachowe/b_pawn.png" /></div>
+			<div class="chess-field color2" id="field-12"><img src="figuryszachowe/b_pawn.png" /></div>
+			<div class="chess-field color1" id="field-13"><img src="figuryszachowe/b_pawn.png" /></div>
+			<div class="chess-field color2" id="field-14"><img src="figuryszachowe/b_pawn.png" /></div>
+			<div class="chess-field color1" id="field-15"><img src="figuryszachowe/b_pawn.png" /></div>
+			<div class="chess-field color2" id="field-16"><img src="figuryszachowe/b_pawn.png" /></div>
+			<div class="chess-field color1" id="field-17"><img src="figuryszachowe/b_pawn.png" /></div>
+		</div>
+		
+		<div class="row" style="display: flex; justify-content: center;">
+			<div class="chess-field color1" id="field-20"></div>
+			<div class="chess-field color2" id="field-21"></div>
+			<div class="chess-field color1" id="field-22"></div>
+			<div class="chess-field color2" id="field-23"></div>
+			<div class="chess-field color1" id="field-24"></div>
+			<div class="chess-field color2" id="field-25"></div>
+			<div class="chess-field color1" id="field-26"></div>
+			<div class="chess-field color2" id="field-27"></div>
+		</div>
+		
+		<div class="row" style="display: flex; justify-content: center;">
+			<div class="chess-field color2" id="field-30"></div>
+			<div class="chess-field color1" id="field-31"></div>
+			<div class="chess-field color2" id="field-32"></div>
+			<div class="chess-field color1" id="field-33"></div>
+			<div class="chess-field color2" id="field-34"></div>
+			<div class="chess-field color1" id="field-35"></div>
+			<div class="chess-field color2" id="field-36"></div>
+			<div class="chess-field color1" id="field-37"></div>
+		</div>
+		
+		<div class="row" style="display: flex; justify-content: center;">
+			<div class="chess-field color1" id="field-40"></div>
+			<div class="chess-field color2" id="field-41"></div>
+			<div class="chess-field color1" id="field-42"></div>
+			<div class="chess-field color2" id="field-43"></div>
+			<div class="chess-field color1" id="field-44"></div>
+			<div class="chess-field color2" id="field-45"></div>
+			<div class="chess-field color1" id="field-46"></div>
+			<div class="chess-field color2" id="field-47"></div>
+		</div>
+		
+		<div class="row" style="display: flex; justify-content: center;">
+			<div class="chess-field color2" id="field-50"></div>
+			<div class="chess-field color1" id="field-51"></div>
+			<div class="chess-field color2" id="field-52"></div>
+			<div class="chess-field color1" id="field-53"></div>
+			<div class="chess-field color2" id="field-54"></div>
+			<div class="chess-field color1" id="field-55"></div>
+			<div class="chess-field color2" id="field-56"></div>
+			<div class="chess-field color1" id="field-57"></div>
+		</div>
+		
+		<div class="row" style="display: flex; justify-content: center;">
+			<div class="chess-field color1" id="field-60"><img src="figuryszachowe/w_pawn.png" /></div>
+			<div class="chess-field color2" id="field-61"><img src="figuryszachowe/w_pawn.png" /></div>
+			<div class="chess-field color1" id="field-62"><img src="figuryszachowe/w_pawn.png" /></div>
+			<div class="chess-field color2" id="field-63"><img src="figuryszachowe/w_pawn.png" /></div>
+			<div class="chess-field color1" id="field-64"><img src="figuryszachowe/w_pawn.png" /></div>
+			<div class="chess-field color2" id="field-65"><img src="figuryszachowe/w_pawn.png" /></div>
+			<div class="chess-field color1" id="field-66"><img src="figuryszachowe/w_pawn.png" /></div>
+			<div class="chess-field color2" id="field-67"><img src="figuryszachowe/w_pawn.png" /></div>
+		</div>
+		
+		<div class="row" style="display: flex; justify-content: center;">
+			<div class="chess-field color2" id="field-70"><img src="figuryszachowe/w_rook.png" /></div>
+			<div class="chess-field color1" id="field-71"><img src="figuryszachowe/w_horse.png" /></div>
+			<div class="chess-field color2" id="field-72"><img src="figuryszachowe/w_bishop.png" /></div>
+			<div class="chess-field color1" id="field-73"><img src="figuryszachowe/w_queen.png" /></div>
+			<div class="chess-field color2" id="field-74"><img src="figuryszachowe/w_king.png" /></div>
+			<div class="chess-field color1" id="field-75"><img src="figuryszachowe/w_bishop.png" /></div>
+			<div class="chess-field color2" id="field-76"><img src="figuryszachowe/w_horse.png" /></div>
+			<div class="chess-field color1" id="field-77"><img src="figuryszachowe/w_rook.png" /></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script src="js-beta.js" type="text/javascript"></script>
+
+</body>
+
+
+
+</html>
