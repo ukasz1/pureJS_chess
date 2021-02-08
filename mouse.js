@@ -15,13 +15,20 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 
 
  console.log(chessboard);
- 	var taken;
-	var given
+ 	var taken=undefined;
+	var given;
 	
-	var pieceAddressI;
-	var pieceAddressJ;
-	var highlightCoordinates = [];
+	var pieceAddressI=null;
+	var pieceAddressJ=null;
+	
+	var prevoiusPieceAddressI=null;
+	var prevoiusPieceAddressJ=null;
+	
+	var movesHistory = [];	// zawiera historię 4 ostatnich ruchów (ich indexów)
+	var el1, el2; 			// obiekty zdarzeń kliknięć
 
+	var error=true;	//czy wystąpił błąd?
+	
 //-------------------------------------------FUNKCJA PODŚWIETLAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
 
 var clickNo=0;			//numer kliknięcia: 0 - pierwsze, 1 - drugie
@@ -40,62 +47,70 @@ function funcTarget(e){
 
 }
 
-//---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE, pobiera figurę-----------------------------------------------------------------------------
+//---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE, pobiera figurę-------------
 
 function markingFirst(e){	
 	
 	
 	var el = funcTarget(e);   
-	
-	coloring(el);
+	el1=el;
 	
 	e.preventDefault();
 	
 	pieceAddressI = el.id[6];
 	pieceAddressJ = el.id[7];
 	
-	taken=chessboard[pieceAddressI][pieceAddressJ];
+	movesHistory.push(pieceAddressI);	//zapamiętanie w historii adresu pierwszego ruchu
+	movesHistory.push(pieceAddressJ);
 	
+	taken=chessboard[pieceAddressI][pieceAddressJ];
 
+	
+	error=false;	// figurę pobrano poprawnie
 }
-//--------------------------------------------FUNKCJA OPUSZCZAJĄCA FIGURĘ-----------------------------------------------------------------------------------------------------
+//--------------------------------------------FUNKCJA OPUSZCZAJĄCA FIGURĘ----------------------------------
 
 function markingSecond(e){	
 	
+	if(error==true){	//pierwsze kliknięcie niepoprawne
+		return 0;
+	}
 	
-	var el = funcTarget(e);   
-	coloring(el);
+	var el = funcTarget(e);
+	el2=el;
+	checkingHighlights();
+
+
+	movesHistory.push(el.id[6]);	//zapamiętanie w historii adresu drugiego ruchu
+	movesHistory.push(el.id[7]);
+	
+	console.log('Historia ruchów: ' + movesHistory);
+	coloring(el1);
+	coloring(el2);
 	
 	chessboard[el.id[6]][el.id[7]]=taken;
 	chessboard[pieceAddressI][pieceAddressJ]=null;
 	
 	console.log(chessboard);
 	
-	checkingHighlights();	//kasuje podświetlenie poprzedniego ruchu
+	error=true;
 	
 }
 
 
 
-
+//------------------------------FUNKCJA KASUJĄCA PODŚWIETLENIE POPRZEDNIEGO RUCHU--------------------------
 function checkingHighlights(){
-	
-	if(highlightCoordinates.length>0){
-		
-		highlightCoordinates=[];
-	}
 	
 	var pole=document.getElementsByClassName('chess-field');
 	for(let i=0; i<64; i++){
 		if(pole[i].className.length>18){
-			
-			highlightCoordinates.push(pole[i].id[6]);
-			highlightCoordinates.push(pole[i].id[7]);
+			coloring(pole[i]);
 		}		
 	}
-	
-	console.log(highlightCoordinates);
 }
+
+
 
 //----------------------------------------------------------------------------------------------
 var pole=document.getElementsByClassName('chess-field');
