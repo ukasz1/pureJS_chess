@@ -24,6 +24,8 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 	var prevoiusPieceAddressI=null;
 	var prevoiusPieceAddressJ=null;
 	
+	var shouldBeColor='w';	//flaga aktywnego gracza
+	
 	var movesHistory = [];	// zawiera historię 4 ostatnich ruchów (ich indexów)
 	var el1, el2; 			// obiekty zdarzeń kliknięć
 
@@ -50,7 +52,7 @@ function funcTarget(e){
 //---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE, pobiera figurę-------------
 
 function markingFirst(e){	
-	
+	error=false;
 	
 	var el = funcTarget(e);   
 	el1=el;
@@ -60,13 +62,26 @@ function markingFirst(e){
 	pieceAddressI = el.id[6];
 	pieceAddressJ = el.id[7];
 	
-	movesHistory.push(pieceAddressI);	//zapamiętanie w historii adresu pierwszego ruchu
-	movesHistory.push(pieceAddressJ);
-	
-	taken=chessboard[pieceAddressI][pieceAddressJ];
+	if(chessboard[pieceAddressI][pieceAddressJ]==null || chessboard[pieceAddressI][pieceAddressJ][0]!=shouldBeColor){	//zły kolor gracza
+		console.log('Nie wybrano właściwej figury!');
+		error=true;
+	}
+	else{
+		if(shouldBeColor=='w'){	//zamiana aktywnego gracza, tj. oczekiwanego koloru do kliknięcia dla następnego ruchu
+				shouldBeColor='b';
+			}
+			else{
+				shouldBeColor='w';
+			}
+		
+		movesHistory.push(pieceAddressI);	//zapamiętanie w historii adresu pierwszego ruchu
+		movesHistory.push(pieceAddressJ);
+		
+		taken=chessboard[pieceAddressI][pieceAddressJ];
 
-	
-	error=false;	// figurę pobrano poprawnie
+		
+		error=false;	// figurę pobrano poprawnie
+	}
 }
 //--------------------------------------------FUNKCJA OPUSZCZAJĄCA FIGURĘ----------------------------------
 
@@ -90,6 +105,8 @@ function markingSecond(e){
 	
 	chessboard[el.id[6]][el.id[7]]=taken;
 	chessboard[pieceAddressI][pieceAddressJ]=null;
+	
+	
 	
 	console.log(chessboard);
 	
