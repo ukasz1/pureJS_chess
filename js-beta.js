@@ -28,6 +28,8 @@ chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
 	
 	var movesHistory = [];	// zawiera historię 4 ostatnich ruchów (ich indexów)
 	var el1, el2; 			// obiekty zdarzeń kliknięć
+	
+	var selectedChessImg;
 
 	var error=true;	//czy wystąpił błąd?
 	
@@ -63,16 +65,10 @@ function markingFirst(e){
 	pieceAddressJ = el.id[7];
 	
 	if(chessboard[pieceAddressI][pieceAddressJ]==null || chessboard[pieceAddressI][pieceAddressJ][0]!=shouldBeColor){	//zły kolor gracza
-		console.log('Nie wybrano właściwej figury!');
+		console.log('Error 1: Nie wybrano właściwej figury!');
 		error=true;
 	}
 	else{
-		if(shouldBeColor=='w'){	//zamiana aktywnego gracza, tj. oczekiwanego koloru do kliknięcia dla następnego ruchu
-				shouldBeColor='b';
-			}
-			else{
-				shouldBeColor='w';
-			}
 		
 		movesHistory.push(pieceAddressI);	//zapamiętanie w historii adresu pierwszego ruchu
 		movesHistory.push(pieceAddressJ);
@@ -87,30 +83,48 @@ function markingFirst(e){
 
 function markingSecond(e){	
 	
-	if(error==true){	//pierwsze kliknięcie niepoprawne
-		return 0;
+	if(error==true){	// pierwsze kliknięcie niepoprawne
+		return 0;		// przerwanie skryptu do czasu właściwego pobrania figury
 	}
 	
 	var el = funcTarget(e);
 	el2=el;
-	checkingHighlights();
-
-
-	movesHistory.push(el.id[6]);	//zapamiętanie w historii adresu drugiego ruchu
-	movesHistory.push(el.id[7]);
+	checkingHighlights();	//usunięcie poprzedniego podświetlenia ruchu
 	
-	console.log('Historia ruchów: ' + movesHistory);
-	coloring(el1);
-	coloring(el2);
+//POPRAWNY RUCH
+	if(true){	//tu należy sprawdzić dopuszczalność ruchu za pomocą funkcji isMovePossible();
 	
-	chessboard[el.id[6]][el.id[7]]=taken;
-	chessboard[pieceAddressI][pieceAddressJ]=null;
+		if(shouldBeColor=='w'){		//zamiana aktywnego gracza, tj. oczekiwanego koloru do kliknięcia dla następnego ruchu
+			shouldBeColor='b';
+		}
+		else{
+			shouldBeColor='w';
+		}
+//----------------
+		
+		movesHistory.push(el.id[6]);	//zapamiętanie w historii adresu drugiego ruchu
+		movesHistory.push(el.id[7]);
+		
+		console.log('Historia ruchów: ' + movesHistory);
+		coloring(el1);
+		coloring(el2);
+		
+		chessboard[el.id[6]][el.id[7]]=taken;				//zmiana stanu pamięci szachownicy
+		chessboard[pieceAddressI][pieceAddressJ]=null;
+		
+		selectedChessImg = document.getElementById(el1.id).innerHTML;	//aktualizacja drzewa DOM i grafiki
+		document.getElementById(el1.id).innerHTML='';
+		document.getElementById(el2.id).innerHTML=selectedChessImg;
+		
+		console.log(chessboard);
+		
+		//error=true;
+	}
 	
+	else{
+		
+	}
 	
-	
-	console.log(chessboard);
-	
-	error=true;
 	
 }
 
