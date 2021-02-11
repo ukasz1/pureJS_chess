@@ -11,4 +11,6 @@ In the future can be expected implementation of the chess engine writen in JavaS
 The graphic layout is completed, but the true challenge is providing the proper moves of the chess pieces. 
 
 ## Application screenshots
-![screenshot1](Screenshots/szachownica.png)
+<div>
+  <img src="/Screenshots/szachownica_2.PNG" width="400px"</img>
+</div>
