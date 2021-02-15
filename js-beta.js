@@ -1,13 +1,13 @@
 var chessboard;
 
-chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
+chessboard =	[[	'bR0',	'bN',	'bB',	'bQ',	'bK0',	'bB',	'bN',	'bR0'],
 				 [	'bP',	'bP',	'bP',	'bP',	'bP',	'bP',	'bP',	'bP'],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	'wP',	'wP',	'wP',	'wP',	'wP',	'wP',	'wP',	'wP'],
-				 [	'wR',	'wN',	'wB',	'wQ',	'wK',	'wB',	'wN',	'wR']];
+				 [	'wR0',	'wN',	'wB',	'wQ',	'wK0',	'wB',	'wN',	'wR0']];
 				 
 
 
@@ -91,8 +91,10 @@ function markingSecond(e){
 	el2=el;
 	checkingHighlights();	//usunięcie poprzedniego podświetlenia ruchu
 	
+	
+	
 //POPRAWNY RUCH
-	if(true){	//tu należy sprawdzić dopuszczalność ruchu za pomocą funkcji isMovePossible();
+	if(isMovePossible(el1, el2, taken, chessboard)){	//tu należy sprawdzić dopuszczalność ruchu za pomocą funkcji isMovePossible();
 	
 		if(shouldBeColor=='w'){		//zamiana aktywnego gracza, tj. oczekiwanego koloru do kliknięcia dla następnego ruchu
 			shouldBeColor='b';
@@ -101,6 +103,8 @@ function markingSecond(e){
 			shouldBeColor='w';
 		}
 //----------------
+		
+		
 		
 		movesHistory.push(el.id[6]);	//zapamiętanie w historii adresu drugiego ruchu
 		movesHistory.push(el.id[7]);
@@ -115,6 +119,7 @@ function markingSecond(e){
 		selectedChessImg = document.getElementById(el1.id).innerHTML;	//aktualizacja drzewa DOM i grafiki
 		document.getElementById(el1.id).innerHTML='';
 		document.getElementById(el2.id).innerHTML=selectedChessImg;
+		
 		
 		console.log(chessboard);
 		

@@ -1,4 +1,27 @@
+//---------------------------SPRAWDZANIE DOPUSZCZALNOŚCI RUCHU----------------------------------
 
+function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
+	
+	var color = taken_arg[0]; 		//kolor pobranej figury
+	var chessPiece = taken_arg[1];	//rodzaj bierki
+	
+	switch(chessPiece){
+		case 'P': 		//pion - Pawn
+			break;
+		case 'N':		//skoczek - kNight
+			break;
+		case 'B':		//goniec - Bishop
+			break;
+		case 'Q':		//hetman - Queen
+			break;
+		case 'K':		//król - King
+			break;
+		case 'R':		//wieża - Rook
+			break;
+	}
+	
+	return true;
+}
 
 //----------------------------------- RUCHY WIEŻY ----------------------------------------------
 
