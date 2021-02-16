@@ -1,12 +1,25 @@
 //---------------------------SPRAWDZANIE DOPUSZCZALNOŚCI RUCHU----------------------------------
 
-function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
+// Funkcja zwraca true, jeśli końcowe pole jest możliwe do zajęcia; false - jeśli nie.
+
+function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){	
+
+	var movesAllowedArray = [];
+	
+	var iAddress1 = el1.id[6];
+	var jAddress1 = el1.id[7];
+	var iAddress2 = el2.id[6];
+	var jAddress2 = el2.id[7];
 	
 	var color = taken_arg[0]; 		//kolor pobranej figury
-	var chessPiece = taken_arg[1];	//rodzaj bierki
+
 	
+	
+	var chessPiece = taken_arg[1];	//rodzaj bierki
+		
 	switch(chessPiece){
-		case 'P': 		//pion - Pawn
+		case 'P': 					//pion - Pawn
+			return true;
 			break;
 		case 'N':		//skoczek - kNight
 			break;
@@ -17,10 +30,17 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 		case 'K':		//król - King
 			break;
 		case 'R':		//wieża - Rook
+			movesAllowedArray = rook(iAddress1, jAddress1, chessboard_arg);
 			break;
 	}
 	
-	return true;
+	for(let i=0; i<movesAllowedArray.length; i++){
+		if(movesAllowedArray[i][0]==iAddress2 && movesAllowedArray[i][1]==jAddress2){
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 //----------------------------------- RUCHY WIEŻY ----------------------------------------------
