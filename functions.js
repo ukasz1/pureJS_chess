@@ -30,12 +30,13 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 		case 'K':		//król - King
 			break;
 		case 'R':		//wieża - Rook
-			movesAllowedArray = rook(iAddress1, jAddress1, chessboard_arg);
+			movesAllowedArray = rook(iAddress1, jAddress1, chessboard);
 			break;
 	}
 	
 	for(let i=0; i<movesAllowedArray.length; i++){
 		if(movesAllowedArray[i][0]==iAddress2 && movesAllowedArray[i][1]==jAddress2){
+			console.log(movesAllowedArray);
 			return true;
 		}
 	}
@@ -50,14 +51,28 @@ function rook(i1,j1,chessboard){
 	
 	//Sprawdzenie istnienia pól szachowych
 	var mtr=1;
-	console.log('Uruchomiona funkcja');
+	console.log('Przed pierwszym whilem ' + i1);
 	
-	while(i1+mtr<8){
+	/*var a = Number(i1);
+	var tmp = a+mtr;
+	var tmp2 = i1+mtr;
+	
+	console.log('i1 + mtr = ' + a + ' + ' + mtr + ' = ' + tmp);
+	console.log('i1 + mtr = ' + a + ' + ' + mtr + ' = ' + tmp2);*/
+	
+	i1=Number(i1);
+	j1=Number(j1);
+	
+	while(i1+mtr<8){	//SPRAWDZANIE MIEJSCA W DÓŁ
+	
+		console.log('PIERWSZY WHILE ' + i1);
+		
 		if(chessboard[i1+mtr][j1]==null){
+			console.log('While1 - if');
 			tab.push([i1+mtr,j1]);
 		}
 		else{
-			console.log('Koniec funkcji');
+			console.log('While1 - else');
 			
 			if(tab.length!=0){
 			//	console.log('tab =');
@@ -72,13 +87,16 @@ function rook(i1,j1,chessboard){
 	}
 	
 	mtr=1;
+	console.log('Przed drugim whilem ' + i1);
 	
-	while(i1-mtr>=0){
+	while(i1-mtr>=0){	//SPRAWDZANIE MIEJSCA W GÓRĘ
+		console.log('DRUGI WHILE' + i1);
 		if(chessboard[i1-mtr][j1]==null){
+			console.log('While2 - if');
 			tab.push([i1-mtr,j1]);
 		}
 		else{
-
+			console.log('While2 - else');
 			
 			if(tab.length!=0){
 
@@ -92,13 +110,16 @@ function rook(i1,j1,chessboard){
 	}
 	
 	mtr=1;
+	console.log('Przed trzecim whilem ' + i1);
 	
-	while(j1+mtr<8){
+	while(j1+mtr<8){	//SPRAWDANIE MIEJSCA W PRAWO
+		console.log('TRZECI WHILE' + i1);
 		if(chessboard[i1][j1+mtr]==null){
+			console.log('While3 - if');
 			tab.push([i1,j1+mtr]);
 		}
 		else{
-
+			console.log('While3 - else');
 			
 			if(tab.length!=0){
 
@@ -112,14 +133,17 @@ function rook(i1,j1,chessboard){
 	}
 	
 	mtr=1;
+	console.log('Przed czwartym whilem ' + i1);
 	
-	while(j1-mtr>=0){
+	while(j1-mtr>=0){		//SPRAWDZANIE MIEJSCA W LEWO
+		console.log('CZWARTY WHILE' + i1);
 		if(chessboard[i1][j1-mtr]==null){
+			console.log('While4 - if');
 			tab.push([i1,j1-mtr]);
 		}
 		else{
 
-			
+			console.log('While4 - else');
 			if(tab.length!=0){
 
 			}
@@ -131,13 +155,13 @@ function rook(i1,j1,chessboard){
 		mtr++;
 	}
 	
-
+	console.log('i1 koniec= ' + i1);
 	console.log(tab);
 	return tab;
 } 
 
 // ---------------------------------------RUCHY GOŃCA ----------------------------------
-
+/*
 function bishop(i1,j1,chessboard){
 	var tab = [];
 	
@@ -226,4 +250,4 @@ function bishop(i1,j1,chessboard){
 	console.log(tab);
 	
 	return tab;
-}
+}*/ 

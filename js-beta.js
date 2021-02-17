@@ -1,12 +1,12 @@
 var chessboard;
 
 chessboard =	[[	'bR0',	'bN',	'bB',	'bQ',	'bK0',	'bB',	'bN',	'bR0'],
-				 [	'bP',	'bP',	'bP',	'bP',	'bP',	'bP',	'bP',	'bP'],
+				 [	'bR',	'bR',	'bR',	'bR',	'bR',	'bR',	'bR',	'bR'],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
-				 [	'wP',	'wP',	'wP',	'wP',	'wP',	'wP',	'wP',	'wP'],
+				 [	'wR0',	'wR0',	'wR0',	'wR',	'wR',	'wR',	'wR',	'wR'],
 				 [	'wR0',	'wN',	'wB',	'wQ',	'wK0',	'wB',	'wN',	'wR0']];
 				 
 
@@ -109,7 +109,7 @@ function markingSecond(e){
 		movesHistory.push(el.id[6]);	//zapamiętanie w historii adresu drugiego ruchu
 		movesHistory.push(el.id[7]);
 		
-		console.log('Historia ruchów: ' + movesHistory);
+		/*console.log('Historia ruchów: ' + movesHistory);*/
 		coloring(el1);
 		coloring(el2);
 		
