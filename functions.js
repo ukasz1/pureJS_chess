@@ -24,8 +24,10 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 		case 'N':		//skoczek - kNight
 			break;
 		case 'B':		//goniec - Bishop
+			movesAllowedArray = bishop(iAddress1, jAddress1, chessboard);
 			break;
 		case 'Q':		//hetman - Queen
+			movesAllowedArray = queen(iAddress1, jAddress1, chessboard);
 			break;
 		case 'K':		//król - King
 			break;
@@ -52,13 +54,6 @@ function rook(i1,j1,chessboard){
 	//Sprawdzenie istnienia pól szachowych
 	var mtr=1;
 	console.log('Przed pierwszym whilem ' + i1);
-	
-	/*var a = Number(i1);
-	var tmp = a+mtr;
-	var tmp2 = i1+mtr;
-	
-	console.log('i1 + mtr = ' + a + ' + ' + mtr + ' = ' + tmp);
-	console.log('i1 + mtr = ' + a + ' + ' + mtr + ' = ' + tmp2);*/
 	
 	i1=Number(i1);
 	j1=Number(j1);
@@ -160,13 +155,18 @@ function rook(i1,j1,chessboard){
 	return tab;
 } 
 
+// -------------------------------------------------------------------------------------
 // ---------------------------------------RUCHY GOŃCA ----------------------------------
-/*
+// -------------------------------------------------------------------------------------
+
 function bishop(i1,j1,chessboard){
 	var tab = [];
 	
 	//Sprawdzenie istnienia pól szachowych
 	var mtr=1;
+	
+	i1 = Number(i1);
+	j1 = Number(j1);
 	
 	console.log('Prawo-dół:');
 	while(i1+mtr<8){
@@ -250,4 +250,24 @@ function bishop(i1,j1,chessboard){
 	console.log(tab);
 	
 	return tab;
-}*/ 
+}
+
+// -------------------------------------------------------------------------------------
+// ---------------------------------------RUCHY HETMANA --------------------------------
+// -------------------------------------------------------------------------------------
+
+function queen(i1,j1,chessboard){
+	
+	var tab = [];
+	var tabBishop = [];
+	var tabRook = [];
+	
+	tabBishop = bishop(i1, j1, chessboard);
+	tabRook = rook(i1, j1, chessboard);
+	
+	tab = tabBishop.concat(tabRook);
+	
+	console.log(tab);
+	
+	return tab;
+}

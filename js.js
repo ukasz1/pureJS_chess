@@ -1,425 +1,181 @@
 var chessboard;
 
-chessboard =	[[	'bR',	'bN',	'bB',	'bQ',	'bK',	'bB',	'bN',	'bR'],
+chessboard =	[[	'bR0',	'bN',	'bB',	'bQ',	'bK0',	'bB',	'bN',	'bR0'],
 				 [	'bP',	'bP',	'bP',	'bP',	'bP',	'bP',	'bP',	'bP'],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	null,	null,	null,	null,	null,	null,	null,	null],
 				 [	'wP',	'wP',	'wP',	'wP',	'wP',	'wP',	'wP',	'wP'],
-				 [	'wR',	'wN',	'wB',	'wQ',	'wK',	'wB',	'wN',	'wR']];
+				 [	'wR0',	'wN',	'wB',	'wQ',	'wK0',	'wB',	'wN',	'wR0']];
 				 
 
 
 				 
 
 
-// console.log(chessboard);
-
-var clickAddress;
-var secondClick;
-var clickNo=0;			//numer kliknięcia: 0 - pierwsze, 1 - drugie
-var selectedChessPiece;	//przenoszona figura
-var selectedChessImg;
-var i1, j1, i2, j2;
-
-var clickAddressFrom;
-var clickAddressTo;
-
-var shouldBeColor='w';	//kolor którego ruch jest oczekiwany; w - white, b - black
-var previousColor;
-var movesAllowedArray=[];
-var moveFlag=false;
-
-
-function marking(e){	//funkcja zaznaczająca pole szachowe
+ console.log(chessboard);
+ 	var taken=undefined;
+	var given;
 	
+	var pieceAddressI=null;
+	var pieceAddressJ=null;
+	
+	var prevoiusPieceAddressI=null;
+	var prevoiusPieceAddressJ=null;
+	
+	var shouldBeColor='w';	//flaga aktywnego gracza
+	
+	var movesHistory = [];	// zawiera historię 4 ostatnich ruchów (ich indexów)
+	var el1, el2; 			// obiekty zdarzeń kliknięć
+	
+	var selectedChessImg;
+
+	var error=true;	//czy wystąpił błąd?
+	
+//-------------------------------------------FUNKCJA PODŚWIETLAJĄCA POLE SZACHOWE---------------------------------------------------------------------------------------------
+
+var clickNo=0;			//numer kliknięcia: 0 - pierwsze, 1 - drugie
+
+function funcTarget(e){
 	
 	var el;
+	el=e.target;						//pobranie węzła obiektu zdarzenia
 	
-	el=e.target;	//pobranie węzła obiektu zdarzenia
-	
-	if(el.hasAttribute('class')){						//czy kliknięto diva (a nie obszar img)?
-	}
+	if(el.hasAttribute('class')){}		//czy kliknięto diva (a nie obszar img)?
 	else{
-		el=el.parentNode;								//jeśli kliknięto obszar img to węzłem obiektu zdarzenia jest rodzic (div)
+		el=el.parentNode;				//jeśli kliknięto obszar img to węzłem obiektu zdarzenia jest rodzic (div)
 	}
 	
-	if(clickNo%2==0){
-		/*
-			KLIKNIĘCIE PIERWSZEGO POLA
-		*/
-		
-		clickAddressFrom=el.id;
-		
-		console.log('clickAddressFrom: '+ clickAddressFrom);
-				
-		var iIndex=clickAddressFrom.charCodeAt(0);	//dekodowanie adresu szachowego celem pobrania indexów
-		var jIndex=clickAddressFrom.charCodeAt(1);
-		
-		i1=0;
-		
-		do{
-			if(56-i1!=jIndex)	//56 - kod ASCII dla znaku '0'
-				i1++;
-			else
-				break;
-		} while(true);
-		
-		j1=0;
-		
-		do{
-			if(j1+97!=iIndex)	//97 - kod ASCII dla znaku 'a'
-				j1++;
-			else
-				break;
-		} while(true);
-		
-		if(chessboard[i1][j1]==null){	//kliknięto puste pole
-			console.clear();
-			console.log('clickNo: ' + clickNo);
-			console.log('Pierwszy klik');
-			console.log('Error 0 - zaznaczono puste pole');
-			console.log('==========================================');
-			
-		}
-		
-		else{
-			if(chessboard[i1][j1][0]==shouldBeColor){//SUKCES
-			
-					console.clear
-					
-					movesAllowedArray=bishop(i1,j1,chessboard);
+	return el;
 
-					
-					selectedChessPiece=chessboard[i1][j1];	//pobranie figury
-					clickNo++;								//kliknięcie zakończone sukcesem
-					
-					console.log('clickNo: ' + clickNo);
-					console.log('Pierwszy klik OK - po funkcji');
-					console.log('==========================================');
-			}
-			else{
-				console.clear();
-				console.log('clickNo: ' + clickNo);
-				console.log('Pierwszy klik - błędny kolor');
-				console.log('Error 1 - niewłaściwy gracz');
-				console.log('==========================================');
-
-			}
-		}
-		//chessboard[i][j]=null;	//sprawdzenie
-				
-	}
-	else{
-		/*
-			KLIKNIĘCIE DRUGIEGO POLA
-		*/
-		
-		// 1. Czy wybrane pole nie jest zajęte przez figurę tego samego gracza?
-		
-		
-		
-		// 2. Czy wybrane pole jest osiągalne dla zaznaczonej figury?
-		// 3. Czy na drodze figury nie stoi inna figura? (nie dotyczy skoczka)
-		
-		clickAddressTo=el.id;
-		
-		console.log('clickAddressTo: '+ clickAddressTo);
-
-		
-		iIndex=clickAddressTo.charCodeAt(0);
-		jIndex=clickAddressTo.charCodeAt(1);
-		
-		i2=0;
-		
-		do{
-			if(56-i2!=jIndex)	//56 - kod ASCII dla znaku '0'
-				i2++;
-			else
-				break;
-		} while(true);
-		
-		j2=0;
-		
-		do{
-			if(j2+97!=iIndex)	//97 - kod ASCII dla znaku 'a'
-				j2++;
-			else
-				break;
-		} while(true);
-		
-		//jest i2, j2++
-		
-		//moveFlag=false;
-		
-		
-		
-		for(let i=0;i<movesAllowedArray.length;i++){
-			
-			if(movesAllowedArray[i][0]==i2 && movesAllowedArray[i][1]==j2){
-				moveFlag=true;
-				console.log(moveFlag);
-				break;
-			}
-			moveFlag=false;
-			
-		}
-		
-		if((chessboard[i2][j2]==null || chessboard[i2][j2][0]!=shouldBeColor) && moveFlag==true){
-			
-			
-			
-			
-			chessboard[i2][j2]=selectedChessPiece;
-			chessboard[i1][j1]=null;
-			moveFlag=false;
-			
-			if(shouldBeColor=='w'){	//zamiana aktywnego gracza, tj. oczekiwanego koloru do kliknięcia
-				shouldBeColor='b';
-			}
-			else{
-				shouldBeColor='w';
-			}
-
-			clickNo++;
-			
-			//console.clear();
-			console.log('clickNo: ' + clickNo);
-			console.log('Poprawny ruch');
-			console.log('==========================================');
-			
-			/*
-			Aktualizacja drzewa DOM
-			*/
-			
-			selectedChessImg=document.getElementById(clickAddressFrom).innerHTML;
-			
-			document.getElementById(clickAddressFrom).innerHTML='';
-			document.getElementById(clickAddressTo).innerHTML=selectedChessImg;
-			
-			
-			
-			//----
-			
-			
-		}
-		else{
-			
-			//console.clear();
-			clickNo--;
-			console.log('clickNo: ' + clickNo);
-			console.log('Drugi klik');
-			console.log('Error 2 - Nie można zbijać swoich figur!');
-			
-			console.log('==========================================');
-		}
-		
-
-		
-		
-		
-	}
-	
- console.log(chessboard); 
 }
 
+//---------------------------------------------FUNKCJA ZAZNACZAJĄCA POLE SZACHOWE, pobiera figurę-------------
+
+function markingFirst(e){	
+	error=false;
+	
+	var el = funcTarget(e);   
+	el1=el;
+	
+	e.preventDefault();
+	
+	pieceAddressI = el.id[6];
+	pieceAddressJ = el.id[7];
+	
+	if(chessboard[pieceAddressI][pieceAddressJ]==null || chessboard[pieceAddressI][pieceAddressJ][0]!=shouldBeColor){	//zły kolor gracza
+		console.log('Error 1: Nie wybrano właściwej figury!');
+		error=true;
+	}
+	else{
+		
+		movesHistory.push(pieceAddressI);	//zapamiętanie w historii adresu pierwszego ruchu
+		movesHistory.push(pieceAddressJ);
+		
+		taken=chessboard[pieceAddressI][pieceAddressJ];
+
+		
+		error=false;	// figurę pobrano poprawnie
+	}
+}
+//--------------------------------------------FUNKCJA OPUSZCZAJĄCA FIGURĘ----------------------------------
+
+function markingSecond(e){	
+	
+	if(error==true){	// pierwsze kliknięcie niepoprawne
+		return 0;		// przerwanie skryptu do czasu właściwego pobrania figury
+	}
+	
+	var el = funcTarget(e);
+	el2=el;
+	checkingHighlights();	//usunięcie poprzedniego podświetlenia ruchu
+	
+	
+	
+//POPRAWNY RUCH
+	if(isMovePossible(el1, el2, taken, chessboard)){	//tu należy sprawdzić dopuszczalność ruchu za pomocą funkcji isMovePossible();
+	
+		if(shouldBeColor=='w'){		//zamiana aktywnego gracza, tj. oczekiwanego koloru do kliknięcia dla następnego ruchu
+			shouldBeColor='b';
+		}
+		else{
+			shouldBeColor='w';
+		}
+//----------------
+		
+		
+		
+		movesHistory.push(el.id[6]);	//zapamiętanie w historii adresu drugiego ruchu
+		movesHistory.push(el.id[7]);
+		
+		/*console.log('Historia ruchów: ' + movesHistory);*/
+		coloring(el1);
+		coloring(el2);
+		
+		chessboard[el.id[6]][el.id[7]]=taken;				//zmiana stanu pamięci szachownicy
+		chessboard[pieceAddressI][pieceAddressJ]=null;
+		
+		selectedChessImg = document.getElementById(el1.id).innerHTML;	//aktualizacja drzewa DOM i grafiki
+		document.getElementById(el1.id).innerHTML='';
+		document.getElementById(el2.id).innerHTML=selectedChessImg;
+		
+		
+		console.log(chessboard);
+		
+		//error=true;
+	}
+	
+	else{
+		
+	}
+	
+	
+}
+
+
+
+//------------------------------FUNKCJA KASUJĄCA PODŚWIETLENIE POPRZEDNIEGO RUCHU--------------------------
+function checkingHighlights(){
+	
+	var pole=document.getElementsByClassName('chess-field');
+	for(let i=0; i<64; i++){
+		if(pole[i].className.length>18){
+			coloring(pole[i]);
+		}		
+	}
+}
+
+
+
+//----------------------------------------------------------------------------------------------
 var pole=document.getElementsByClassName('chess-field');
 
 for(let i=0; i<64;i++){
-	pole[i].addEventListener('click', marking, true);}
-	
-function rook(i1,j1,chessboard){
-	var tab = [];
-	
-	//Sprawdzenie istnienia pól szachowych
-	var mtr=1;
-	console.log('Uruchomiona funkcja');
-	
-	while(i1+mtr<8){
-		if(chessboard[i1+mtr][j1]==null){
-			tab.push([i1+mtr,j1]);
-		}
-		else{
-			console.log('Koniec funkcji');
-			
-			if(tab.length!=0){
-			//	console.log('tab =');
-			//	console.log(tab);
-			}
-			else
-				console.log('Brak ruchów ruchów w dół');
-			
-			break;
-		}
-		mtr++;
+	pole[i].addEventListener('mousedown', function(e){markingFirst(e);}, false);
+	pole[i].addEventListener('mouseup', function(e){markingSecond(e);}, false);
 	}
-	
-	mtr=1;
-	
-	while(i1-mtr>=0){
-		if(chessboard[i1-mtr][j1]==null){
-			tab.push([i1-mtr,j1]);
-		}
-		else{
 
-			
-			if(tab.length!=0){
-
-			}
-			else
-				console.log('Brak ruchów w górę');
-			
-			break;
-		}
-		mtr++;
-	}
-	
-	mtr=1;
-	
-	while(j1+mtr<8){
-		if(chessboard[i1][j1+mtr]==null){
-			tab.push([i1,j1+mtr]);
-		}
-		else{
-
-			
-			if(tab.length!=0){
-
-			}
-			else
-				console.log('Brak ruchów w prawo');
-			
-			break;
-		}
-		mtr++;
-	}
-	
-	mtr=1;
-	
-	while(j1-mtr>=0){
-		if(chessboard[i1][j1-mtr]==null){
-			tab.push([i1,j1-mtr]);
-		}
-		else{
-
-			
-			if(tab.length!=0){
-
-			}
-			else
-				console.log('Brak ruchów w lewo');
-			
-			break;
-		}
-		mtr++;
-	}
-	
-
-	//console.log(tab);
-	return tab;
-} 
-//-----------------------------------------------------------------------------------------------------
-function bishop(i1,j1,chessboard){
-	var tab = [];
-	
-	//Sprawdzenie istnienia pól szachowych
-	var mtr=1;
-	
-	console.log('Prawo-dół:');
-	while(i1+mtr<8){
-		
-		if(chessboard[i1+mtr][j1+mtr]==null && j1+mtr<8){
-			tab.push([i1+mtr,j1+mtr]);
-		}
-		else{	
-			if(tab.length!=0){}
-			else{
-				console.log('Length=0:'); // do usunięcia w obu funkcjach
-			}
-			
-			break;
-		}
-		mtr++;
-	}
-	
-	mtr=1;
-	
-	while(i1+mtr<8){
-		
-		if(chessboard[i1+mtr][j1-mtr]==null && j1-mtr>=0){
-			tab.push([i1+mtr,j1-mtr]);
-		}
-		else{
-
-			
-			if(tab.length!=0){}
-			else{
-				console.log('Length=0:');
-			}
-			
-			break;
-		}
-		mtr++;
-	}
+//---------------------------- KOLOROWANIE PÓL --------------------------------------------------
+function coloring(arg){
+	var chessFieldColor;
+	chessFieldColor=arg.className[17];
 	
 	
-	mtr=1;
-	
-	while(i1-mtr>=0){
-		
-		if(chessboard[i1-mtr][j1+mtr]==null && j1+mtr<8){
-			tab.push([i1-mtr,j1+mtr]);
-
-		}
-		else{
-
-			
-			if(tab.length!=0){}
-			else{
-				console.log('Length=0:');
-			}
-			
-			break;
-		}
-		mtr++;
-	}
-	
-	
-	mtr=1;
-	
-	console.log('Lewo-góra:');
-	while(i1-mtr>=0){
-		if(chessboard[i1-mtr][j1-mtr]==null && j1-mtr>=0){
-			tab.push([i1-mtr,j1-mtr]);
-		}
-		else{		
-			if(tab.length!=0){}
-			else{
-				console.log('Length=0:');
-			}
-				
-			break;
-		}
-		mtr++;
-	}
-	
-
-	//console.log(tab);
-	
-	return tab;
-}
-
-/*	var chessFieldColor;
-	chessFieldColor=el.className[17];
-	
-	if(chessFieldColor==='2'){							// color1 czy color2?
-		el.classList.toggle('chess-field-marked-green');
+	if(chessFieldColor==='2'){								// color1 czy color2?
+		arg.classList.toggle('chess-field-marked-green');
 	}
 	else{
-		el.classList.toggle('chess-field-marked-white');
+		arg.classList.toggle('chess-field-marked-white');
 	}
-*/	
+}
+
+
+
+
+
+
+
 
 
 
