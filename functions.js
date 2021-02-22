@@ -19,7 +19,10 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 		
 	switch(chessPiece){
 		case 'P': 					//pion - Pawn
-			return true;
+			if(color=='w')
+				movesAllowedArray = pawnW(iAddress1, jAddress1, chessboard);
+			else
+				return true;
 			break;
 		case 'N':		//skoczek - kNight
 			break;
@@ -45,6 +48,34 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 	
 	return false;
 }
+
+//----------------------------------- RUCH PIONA BIAŁEGO ---------------------------------------
+function pawnW(i1, j1, chessboard){
+	
+	i1=Number(i1);
+	j1=Number(j1);
+	
+	var tab = [];
+	
+	if(i1==0)
+		return tab;
+	if(i1<6){
+		if(chessboard[i1-1][j1]==null){
+			tab.push([i1-1,j1]);
+		}
+	}
+	else
+		if(chessboard[i1-1][j1]==null){
+			tab.push([i1-1,j1]);
+			
+			if(chessboard[i1-2][j1]==null){
+				tab.push([i1-2,j1]);
+			}
+		}
+	console.log(tab);
+	return tab;
+}
+
 
 //----------------------------------- RUCHY WIEŻY ----------------------------------------------
 
