@@ -22,7 +22,7 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 			if(color=='w')
 				movesAllowedArray = pawnW(iAddress1, jAddress1, chessboard);
 			else
-				return true;
+				movesAllowedArray = pawnB(iAddress1, jAddress1, chessboard);
 			break;
 		case 'N':		//skoczek - kNight
 			break;
@@ -70,6 +70,33 @@ function pawnW(i1, j1, chessboard){
 			
 			if(chessboard[i1-2][j1]==null){
 				tab.push([i1-2,j1]);
+			}
+		}
+	console.log(tab);
+	return tab;
+}
+
+//----------------------------------- RUCH PIONA CZARNEGO ---------------------------------------
+function pawnB(i1, j1, chessboard){
+	
+	i1=Number(i1);
+	j1=Number(j1);
+	
+	var tab = [];
+	
+	if(i1==7)
+		return tab;
+	if(i1>1){
+		if(chessboard[i1+1][j1]==null){
+			tab.push([i1+1,j1]);
+		}
+	}
+	else
+		if(chessboard[i1+1][j1]==null){
+			tab.push([i1+1,j1]);
+			
+			if(chessboard[i1+2][j1]==null){
+				tab.push([i1+2,j1]);
 			}
 		}
 	console.log(tab);
