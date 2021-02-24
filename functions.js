@@ -347,7 +347,7 @@ function king(i1,j1,chessboard){
 			tab.push([i1-1, j1-1]);
 	
 	if(i1-1>=0 && j1>=0)
-		if(chessboard[i1-1][j1]=null)
+		if(chessboard[i1-1][j1]==null)
 			tab.push([i1-1,j1]);
 	
 	if(i1-1>=0 && j1+1<=7)
@@ -363,15 +363,15 @@ function king(i1,j1,chessboard){
 			tab.push([i1,j1+1]);
 	
 	if(i1+1<=7 && j1-1>=0)
-		if(chessboard[i1+1][j1-1]=null)
+		if(chessboard[i1+1][j1-1]==null)
 			tab.push([i1+1,j1-1]);
 	
 	if(i1+1<=7 && j1<=7)
-		if(chessboard[i1+1][j1]=null)
+		if(chessboard[i1+1][j1]==null)
 			tab.push([i1+1, j1]);
 	
 	if(i1+1<=7 && j1+1<=7)
-		if(chessboard[i1+1][j1+1]=null)
+		if(chessboard[i1+1][j1+1]==null)
 			tab.push([i1+1,j1+1]);
 	
 	console.log('Król:');
