@@ -33,6 +33,7 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 			movesAllowedArray = queen(iAddress1, jAddress1, chessboard);
 			break;
 		case 'K':		//król - King
+			movesAllowedArray = king(iAddress1, jAddress1, chessboard);
 			break;
 		case 'R':		//wieża - Rook
 			movesAllowedArray = rook(iAddress1, jAddress1, chessboard);
@@ -327,5 +328,53 @@ function queen(i1,j1,chessboard){
 	
 	console.log(tab);
 	
+	return tab;
+}
+
+// -------------------------------------------------------------------------------------
+// ---------------------------------------RUCHY KRÓLA ----------------------------------
+// -------------------------------------------------------------------------------------
+
+function king(i1,j1,chessboard){
+	
+	var tab = [];
+	
+	i1 = Number(i1);
+	j1 = Number(j1);
+	
+	if(i1-1>=0 && j1-1>=0)
+		if(chessboard[i1-1][j1-1]==null)
+			tab.push([i1-1, j1-1]);
+	
+	if(i1-1>=0 && j1>=0)
+		if(chessboard[i1-1][j1]=null)
+			tab.push([i1-1,j1]);
+	
+	if(i1-1>=0 && j1+1<=7)
+		if(chessboard[i1-1][j1+1]==null)
+			tab.push([i1-1,j1+1]);
+	
+	if(i1>=0 && j1-1>=0)						//pierwszy warunek jest zawsze spełniony, da się zopymalizować?
+		if(chessboard[i1][j1-1]==null)
+			tab.push([i1,j1-1]);
+	
+	if(i1<=7 && j1+1<=7)
+		if(chessboard[i1][j1+1]==null)
+			tab.push([i1,j1+1]);
+	
+	if(i1+1<=7 && j1-1>=0)
+		if(chessboard[i1+1][j1-1]=null)
+			tab.push([i1+1,j1-1]);
+	
+	if(i1+1<=7 && j1<=7)
+		if(chessboard[i1+1][j1]=null)
+			tab.push([i1+1, j1]);
+	
+	if(i1+1<=7 && j1+1<=7)
+		if(chessboard[i1+1][j1+1]=null)
+			tab.push([i1+1,j1+1]);
+	
+	console.log('Król:');
+	console.log(tab);
 	return tab;
 }
