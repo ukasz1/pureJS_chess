@@ -25,6 +25,7 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 				movesAllowedArray = pawnB(iAddress1, jAddress1, chessboard);
 			break;
 		case 'N':		//skoczek - kNight
+			movesAllowedArray = knight(iAddress1, jAddress1, chessboard);
 			break;
 		case 'B':		//goniec - Bishop
 			movesAllowedArray = bishop(iAddress1, jAddress1, chessboard);
@@ -374,7 +375,54 @@ function king(i1,j1,chessboard){
 		if(chessboard[i1+1][j1+1]==null)
 			tab.push([i1+1,j1+1]);
 	
-	console.log('Król:');
+	console.log(tab);
+	return tab;
+}
+
+// -------------------------------------------------------------------------------------
+// ---------------------------------------RUCHY SKOCZKA --------------------------------
+// -------------------------------------------------------------------------------------
+
+function knight(i,j,chessboard){
+	
+	var tab = [];
+	
+	i = Number(i);
+	j = Number(j);
+
+	if(i-1>=0 && j-2>=0)
+		if(chessboard[i-1][j-2]==null)
+			tab.push([i-1,j-2]);
+	
+	if(i-2>=0 && j-1>=0)
+		if(chessboard[i-2][j-1]==null)
+			tab.push([i-2,j-1]);
+	
+	if(i-2>=0 && j+1<=7)
+		if(chessboard[i-2][j+1]==null)
+			tab.push([i-2,j+1]);
+	
+	if(i-1>=0 && j+2<=7)
+		if(chessboard[i-1][j+2]==null)
+			tab.push([i-1,j+2]);
+	
+	if(i+1<=7 && j-2>=0)
+		if(chessboard[i+1][j-2]==null)
+			tab.push([i+1,j-2]);
+
+	if(i+2<=7 && j-1>=0)
+		if(chessboard[i+2][j-1]==null)
+			tab.push([i+2,j-1]);
+	
+	if(i+2<=7 && j+1<=7)
+		if(chessboard[i+2][j+1]==null)
+			tab.push([i+2,j+1]);
+	
+	if(i+1<=7 && j+2<=7)
+		if(chessboard[i+1][j+2]==null)
+			tab.push([i+1,j+2]);
+	
+	
 	console.log(tab);
 	return tab;
 }
