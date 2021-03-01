@@ -168,13 +168,13 @@ function rook(i1,j1,chessboard){
 	console.log('Przed trzecim whilem ' + i1);
 	
 	while(j1+mtr<8){	//SPRAWDANIE MIEJSCA W PRAWO
-		console.log('TRZECI WHILE' + i1);
+		
 		if(chessboard[i1][j1+mtr]==null){
-			console.log('While3 - if');
+			
 			tab.push([i1,j1+mtr]);
 		}
 		else{
-			console.log('While3 - else');
+			
 			
 			if(tab.length!=0){
 
@@ -188,17 +188,17 @@ function rook(i1,j1,chessboard){
 	}
 	
 	mtr=1;
-	console.log('Przed czwartym whilem ' + i1);
+	
 	
 	while(j1-mtr>=0){		//SPRAWDZANIE MIEJSCA W LEWO
-		console.log('CZWARTY WHILE' + i1);
+		
 		if(chessboard[i1][j1-mtr]==null){
-			console.log('While4 - if');
+			
 			tab.push([i1,j1-mtr]);
 		}
 		else{
 
-			console.log('While4 - else');
+			
 			if(tab.length!=0){
 
 			}
@@ -210,7 +210,6 @@ function rook(i1,j1,chessboard){
 		mtr++;
 	}
 	
-	console.log('i1 koniec= ' + i1);
 	console.log(tab);
 	return tab;
 } 
@@ -228,7 +227,7 @@ function bishop(i1,j1,chessboard){
 	i1 = Number(i1);
 	j1 = Number(j1);
 	
-	console.log('Prawo-dół:');
+
 	while(i1+mtr<8){
 		
 		if(chessboard[i1+mtr][j1+mtr]==null && j1+mtr<8){
@@ -237,7 +236,7 @@ function bishop(i1,j1,chessboard){
 		else{	
 			if(tab.length!=0){}
 			else{
-				console.log('Length=0:'); // do usunięcia w obu funkcjach
+				
 			}
 			
 			break;
@@ -257,7 +256,7 @@ function bishop(i1,j1,chessboard){
 			
 			if(tab.length!=0){}
 			else{
-				console.log('Length=0:');
+				
 			}
 			
 			break;
@@ -279,7 +278,7 @@ function bishop(i1,j1,chessboard){
 			
 			if(tab.length!=0){}
 			else{
-				console.log('Length=0:');
+				
 			}
 			
 			break;
@@ -298,7 +297,7 @@ function bishop(i1,j1,chessboard){
 		else{		
 			if(tab.length!=0){}
 			else{
-				console.log('Length=0:');
+				
 			}
 				
 			break;
