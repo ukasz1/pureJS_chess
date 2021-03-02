@@ -20,24 +20,24 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 	switch(chessPiece){
 		case 'P': 					//pion - Pawn
 			if(color=='w')
-				movesAllowedArray = pawnW(iAddress1, jAddress1, chessboard);
+				movesAllowedArray = pawnW(iAddress1, jAddress1, chessboard, color);
 			else
-				movesAllowedArray = pawnB(iAddress1, jAddress1, chessboard);
+				movesAllowedArray = pawnB(iAddress1, jAddress1, chessboard, color);
 			break;
 		case 'N':		//skoczek - kNight
-			movesAllowedArray = knight(iAddress1, jAddress1, chessboard);
+			movesAllowedArray = knight(iAddress1, jAddress1, chessboard, color);
 			break;
 		case 'B':		//goniec - Bishop
-			movesAllowedArray = bishop(iAddress1, jAddress1, chessboard);
+			movesAllowedArray = bishop(iAddress1, jAddress1, chessboard, color);
 			break;
 		case 'Q':		//hetman - Queen
-			movesAllowedArray = queen(iAddress1, jAddress1, chessboard);
+			movesAllowedArray = queen(iAddress1, jAddress1, chessboard, color);
 			break;
 		case 'K':		//król - King
-			movesAllowedArray = king(iAddress1, jAddress1, chessboard);
+			movesAllowedArray = king(iAddress1, jAddress1, chessboard, color);
 			break;
 		case 'R':		//wieża - Rook
-			movesAllowedArray = rook(iAddress1, jAddress1, chessboard);
+			movesAllowedArray = rook(iAddress1, jAddress1, chessboard, color);
 			break;
 	}
 	
@@ -52,7 +52,7 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 }
 
 //----------------------------------- RUCH PIONA BIAŁEGO ---------------------------------------
-function pawnW(i1, j1, chessboard){
+function pawnW(i1, j1, chessboard, color){
 	
 	i1=Number(i1);
 	j1=Number(j1);
@@ -79,7 +79,7 @@ function pawnW(i1, j1, chessboard){
 }
 
 //----------------------------------- RUCH PIONA CZARNEGO ---------------------------------------
-function pawnB(i1, j1, chessboard){
+function pawnB(i1, j1, chessboard, color){
 	
 	i1=Number(i1);
 	j1=Number(j1);
@@ -108,7 +108,7 @@ function pawnB(i1, j1, chessboard){
 
 //----------------------------------- RUCHY WIEŻY ----------------------------------------------
 
-function rook(i1,j1,chessboard){
+function rook(i1,j1,chessboard, color){
 	var tab = [];
 	
 	//Sprawdzenie istnienia pól szachowych
@@ -218,7 +218,7 @@ function rook(i1,j1,chessboard){
 // ---------------------------------------RUCHY GOŃCA ----------------------------------
 // -------------------------------------------------------------------------------------
 
-function bishop(i1,j1,chessboard){
+function bishop(i1,j1,chessboard, color){
 	var tab = [];
 	
 	//Sprawdzenie istnienia pól szachowych
@@ -315,7 +315,7 @@ function bishop(i1,j1,chessboard){
 // ---------------------------------------RUCHY HETMANA --------------------------------
 // -------------------------------------------------------------------------------------
 
-function queen(i1,j1,chessboard){
+function queen(i1,j1,chessboard, color){
 	
 	var tab = [];
 	var tabBishop = [];
@@ -335,43 +335,50 @@ function queen(i1,j1,chessboard){
 // ---------------------------------------RUCHY KRÓLA ----------------------------------
 // -------------------------------------------------------------------------------------
 
-function king(i1,j1,chessboard){
+function king(i1,j1,chessboard, color){
 	
 	var tab = [];
 	
 	i1 = Number(i1);
 	j1 = Number(j1);
 	
+	var opponentsColor;
+	
+	if(color=='w')
+		opponentsColor='b';
+	else
+		opponentsColor='w';
+	
 	if(i1-1>=0 && j1-1>=0)
-		if(chessboard[i1-1][j1-1]==null)
+		if(chessboard[i1-1][j1-1]==null || chessboard[i1-1][j1-1][0]==opponentsColor)
 			tab.push([i1-1, j1-1]);
 	
 	if(i1-1>=0 && j1>=0)
-		if(chessboard[i1-1][j1]==null)
+		if(chessboard[i1-1][j1]==null || chessboard[i1-1][j1][0]==opponentsColor)
 			tab.push([i1-1,j1]);
 	
 	if(i1-1>=0 && j1+1<=7)
-		if(chessboard[i1-1][j1+1]==null)
+		if(chessboard[i1-1][j1+1]==null || chessboard[i1-1][j1+1][0]==opponentsColor)
 			tab.push([i1-1,j1+1]);
 	
 	if(i1>=0 && j1-1>=0)						//pierwszy warunek jest zawsze spełniony, da się zopymalizować?
-		if(chessboard[i1][j1-1]==null)
+		if(chessboard[i1][j1-1]==null || chessboard[i1][j1-1][0]==opponentsColor)
 			tab.push([i1,j1-1]);
 	
 	if(i1<=7 && j1+1<=7)
-		if(chessboard[i1][j1+1]==null)
+		if(chessboard[i1][j1+1]==null || chessboard[i1][j1+1][0]==opponentsColor)
 			tab.push([i1,j1+1]);
 	
 	if(i1+1<=7 && j1-1>=0)
-		if(chessboard[i1+1][j1-1]==null)
+		if(chessboard[i1+1][j1-1]==null || chessboard[i1+1][j1-1][0]==opponentsColor)
 			tab.push([i1+1,j1-1]);
 	
 	if(i1+1<=7 && j1<=7)
-		if(chessboard[i1+1][j1]==null)
+		if(chessboard[i1+1][j1]==null || chessboard[i1+1][j1][0]==opponentsColor)
 			tab.push([i1+1, j1]);
 	
 	if(i1+1<=7 && j1+1<=7)
-		if(chessboard[i1+1][j1+1]==null)
+		if(chessboard[i1+1][j1+1]==null || chessboard[i1+1][j1+1][0]==opponentsColor)
 			tab.push([i1+1,j1+1]);
 	
 	console.log(tab);
@@ -382,7 +389,7 @@ function king(i1,j1,chessboard){
 // ---------------------------------------RUCHY SKOCZKA --------------------------------
 // -------------------------------------------------------------------------------------
 
-function knight(i,j,chessboard){
+function knight(i,j,chessboard, color){
 	
 	var tab = [];
 	
