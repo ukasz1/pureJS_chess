@@ -113,7 +113,7 @@ function rook(i1,j1,chessboard, color){
 	
 	//Sprawdzenie istnienia pól szachowych
 	var mtr=1;
-	console.log('Przed pierwszym whilem ' + i1);
+
 	
 	i1=Number(i1);
 	j1=Number(j1);
@@ -123,18 +123,18 @@ function rook(i1,j1,chessboard, color){
 		console.log('PIERWSZY WHILE ' + i1);
 		
 		if(chessboard[i1+mtr][j1]==null){
-			console.log('While1 - if');
+
 			tab.push([i1+mtr,j1]);
 		}
 		else{
-			console.log('While1 - else');
+
 			
 			if(tab.length!=0){
 			//	console.log('tab =');
 			//	console.log(tab);
 			}
 			else
-				console.log('Brak ruchów ruchów w dół');
+
 			
 			break;
 		}
@@ -142,22 +142,22 @@ function rook(i1,j1,chessboard, color){
 	}
 	
 	mtr=1;
-	console.log('Przed drugim whilem ' + i1);
+
 	
 	while(i1-mtr>=0){	//SPRAWDZANIE MIEJSCA W GÓRĘ
-		console.log('DRUGI WHILE' + i1);
+
 		if(chessboard[i1-mtr][j1]==null){
-			console.log('While2 - if');
+
 			tab.push([i1-mtr,j1]);
 		}
 		else{
-			console.log('While2 - else');
+
 			
 			if(tab.length!=0){
 
 			}
 			else
-				console.log('Brak ruchów w górę');
+
 			
 			break;
 		}
@@ -165,7 +165,7 @@ function rook(i1,j1,chessboard, color){
 	}
 	
 	mtr=1;
-	console.log('Przed trzecim whilem ' + i1);
+
 	
 	while(j1+mtr<8){	//SPRAWDANIE MIEJSCA W PRAWO
 		
@@ -180,7 +180,7 @@ function rook(i1,j1,chessboard, color){
 
 			}
 			else
-				console.log('Brak ruchów w prawo');
+
 			
 			break;
 		}
@@ -203,7 +203,7 @@ function rook(i1,j1,chessboard, color){
 
 			}
 			else
-				console.log('Brak ruchów w lewo');
+
 			
 			break;
 		}
@@ -226,6 +226,13 @@ function bishop(i1,j1,chessboard, color){
 	
 	i1 = Number(i1);
 	j1 = Number(j1);
+	
+	var opponentsColor;
+	
+	if(color=='w')
+		opponentsColor='b';
+	else
+		opponentsColor='w';
 	
 
 	while(i1+mtr<8){
@@ -289,7 +296,7 @@ function bishop(i1,j1,chessboard, color){
 	
 	mtr=1;
 	
-	console.log('Lewo-góra:');
+
 	while(i1-mtr>=0){
 		if(chessboard[i1-mtr][j1-mtr]==null && j1-mtr>=0){
 			tab.push([i1-mtr,j1-mtr]);
@@ -395,37 +402,44 @@ function knight(i,j,chessboard, color){
 	
 	i = Number(i);
 	j = Number(j);
+	
+	var opponentsColor;
+	
+	if(color=='w')
+		opponentsColor='b';
+	else
+		opponentsColor='w';
 
 	if(i-1>=0 && j-2>=0)
-		if(chessboard[i-1][j-2]==null)
+		if(chessboard[i-1][j-2]==null || chessboard[i-1][j-2][0]==opponentsColor)
 			tab.push([i-1,j-2]);
 	
 	if(i-2>=0 && j-1>=0)
-		if(chessboard[i-2][j-1]==null)
+		if(chessboard[i-2][j-1]==null || chessboard[i-2][j-1][0]==opponentsColor)
 			tab.push([i-2,j-1]);
 	
 	if(i-2>=0 && j+1<=7)
-		if(chessboard[i-2][j+1]==null)
+		if(chessboard[i-2][j+1]==null || chessboard[i-2][j+1][0]==opponentsColor)
 			tab.push([i-2,j+1]);
 	
 	if(i-1>=0 && j+2<=7)
-		if(chessboard[i-1][j+2]==null)
+		if(chessboard[i-1][j+2]==null || chessboard[i-1][j+2][0]==opponentsColor)
 			tab.push([i-1,j+2]);
 	
 	if(i+1<=7 && j-2>=0)
-		if(chessboard[i+1][j-2]==null)
+		if(chessboard[i+1][j-2]==null || chessboard[i+1][j-2][0]==opponentsColor)
 			tab.push([i+1,j-2]);
 
 	if(i+2<=7 && j-1>=0)
-		if(chessboard[i+2][j-1]==null)
+		if(chessboard[i+2][j-1]==null || chessboard[i+2][j-1][0]==opponentsColor)
 			tab.push([i+2,j-1]);
 	
 	if(i+2<=7 && j+1<=7)
-		if(chessboard[i+2][j+1]==null)
+		if(chessboard[i+2][j+1]==null || chessboard[i+2][j+1][0]==opponentsColor)
 			tab.push([i+2,j+1]);
 	
 	if(i+1<=7 && j+2<=7)
-		if(chessboard[i+1][j+2]==null)
+		if(chessboard[i+1][j+2]==null || chessboard[i+1][j+2][0]==opponentsColor)
 			tab.push([i+1,j+2]);
 	
 	
