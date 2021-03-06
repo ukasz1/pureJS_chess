@@ -111,33 +111,33 @@ function pawnB(i1, j1, chessboard, color){
 function rook(i1,j1,chessboard, color){
 	var tab = [];
 	
+	i1=Number(i1);
+	j1=Number(j1);
+	
+	var opponentsColor;
+	
+	if(color=='w')
+		opponentsColor='b';
+	else
+		opponentsColor='w';
+	
 	//Sprawdzenie istnienia pól szachowych
 	var mtr=1;
 
 	
-	i1=Number(i1);
-	j1=Number(j1);
+
 	
 	while(i1+mtr<8){	//SPRAWDZANIE MIEJSCA W DÓŁ
 	
-		console.log('PIERWSZY WHILE ' + i1);
+
 		
 		if(chessboard[i1+mtr][j1]==null){
-
 			tab.push([i1+mtr,j1]);
 		}
 		else{
-
-			
-			if(tab.length!=0){
-			//	console.log('tab =');
-			//	console.log(tab);
-			}
-			else
-
-			
 			break;
 		}
+		
 		mtr++;
 	}
 	
@@ -147,20 +147,12 @@ function rook(i1,j1,chessboard, color){
 	while(i1-mtr>=0){	//SPRAWDZANIE MIEJSCA W GÓRĘ
 
 		if(chessboard[i1-mtr][j1]==null){
-
 			tab.push([i1-mtr,j1]);
 		}
-		else{
-
-			
-			if(tab.length!=0){
-
-			}
-			else
-
-			
+		else{	
 			break;
 		}
+		
 		mtr++;
 	}
 	
@@ -170,20 +162,12 @@ function rook(i1,j1,chessboard, color){
 	while(j1+mtr<8){	//SPRAWDANIE MIEJSCA W PRAWO
 		
 		if(chessboard[i1][j1+mtr]==null){
-			
 			tab.push([i1,j1+mtr]);
 		}
 		else{
-			
-			
-			if(tab.length!=0){
-
-			}
-			else
-
-			
 			break;
 		}
+		
 		mtr++;
 	}
 	
@@ -193,20 +177,12 @@ function rook(i1,j1,chessboard, color){
 	while(j1-mtr>=0){		//SPRAWDZANIE MIEJSCA W LEWO
 		
 		if(chessboard[i1][j1-mtr]==null){
-			
 			tab.push([i1,j1-mtr]);
 		}
-		else{
-
-			
-			if(tab.length!=0){
-
-			}
-			else
-
-			
+		else{	
 			break;
 		}
+		
 		mtr++;
 	}
 	
@@ -241,13 +217,9 @@ function bishop(i1,j1,chessboard, color){
 			tab.push([i1+mtr,j1+mtr]);
 		}
 		else{	
-			if(tab.length!=0){}
-			else{
-				
-			}
-			
 			break;
 		}
+		
 		mtr++;
 	}
 	
@@ -258,16 +230,10 @@ function bishop(i1,j1,chessboard, color){
 		if(chessboard[i1+mtr][j1-mtr]==null && j1-mtr>=0){
 			tab.push([i1+mtr,j1-mtr]);
 		}
-		else{
-
-			
-			if(tab.length!=0){}
-			else{
-				
-			}
-			
+		else{	
 			break;
 		}
+		
 		mtr++;
 	}
 	
@@ -278,18 +244,11 @@ function bishop(i1,j1,chessboard, color){
 		
 		if(chessboard[i1-mtr][j1+mtr]==null && j1+mtr<8){
 			tab.push([i1-mtr,j1+mtr]);
-
 		}
 		else{
-
-			
-			if(tab.length!=0){}
-			else{
-				
-			}
-			
 			break;
 		}
+		
 		mtr++;
 	}
 	
@@ -298,17 +257,14 @@ function bishop(i1,j1,chessboard, color){
 	
 
 	while(i1-mtr>=0){
+		
 		if(chessboard[i1-mtr][j1-mtr]==null && j1-mtr>=0){
 			tab.push([i1-mtr,j1-mtr]);
 		}
 		else{		
-			if(tab.length!=0){}
-			else{
-				
-			}
-				
 			break;
 		}
+		
 		mtr++;
 	}
 	
