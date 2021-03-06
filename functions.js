@@ -131,10 +131,13 @@ function rook(i1,j1,chessboard, color){
 	
 
 		
-		if(chessboard[i1+mtr][j1]==null){
+		if(chessboard[i1+mtr][j1]==null){	//puste pola
 			tab.push([i1+mtr,j1]);
 		}
 		else{
+			if(chessboard[i1+mtr][j1][0]==opponentsColor){	//bierka przeciwnika, czyli ostatnie pole
+				tab.push([i1+mtr,j1]);
+			}
 			break;
 		}
 		
@@ -150,6 +153,9 @@ function rook(i1,j1,chessboard, color){
 			tab.push([i1-mtr,j1]);
 		}
 		else{	
+			if(chessboard[i1-mtr][j1][0]==opponentsColor){
+				tab.push([i1-mtr,j1]);
+			}
 			break;
 		}
 		
@@ -165,6 +171,9 @@ function rook(i1,j1,chessboard, color){
 			tab.push([i1,j1+mtr]);
 		}
 		else{
+			if(chessboard[i1][j1+mtr][0]==opponentsColor){
+				tab.push([i1,j1+mtr]);
+			}
 			break;
 		}
 		
@@ -180,6 +189,9 @@ function rook(i1,j1,chessboard, color){
 			tab.push([i1,j1-mtr]);
 		}
 		else{	
+			if(chessboard[i1][j1-mtr][0]==opponentsColor){
+				tab.push([i1,j1-mtr]);
+			}
 			break;
 		}
 		
