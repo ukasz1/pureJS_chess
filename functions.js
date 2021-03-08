@@ -225,10 +225,13 @@ function bishop(i1,j1,chessboard, color){
 
 	while(i1+mtr<8){
 		
-		if(chessboard[i1+mtr][j1+mtr]==null && j1+mtr<8){
+		if(chessboard[i1+mtr][j1+mtr]==null/* && j1+mtr<8*/){
 			tab.push([i1+mtr,j1+mtr]);
 		}
-		else{	
+		else{
+			if(chessboard[i1+mtr][j1+mtr][0]==opponentsColor){
+				tab.push([i1+mtr,j1+mtr]);
+			}
 			break;
 		}
 		
@@ -239,10 +242,13 @@ function bishop(i1,j1,chessboard, color){
 	
 	while(i1+mtr<8){
 		
-		if(chessboard[i1+mtr][j1-mtr]==null && j1-mtr>=0){
+		if(chessboard[i1+mtr][j1-mtr]==null/* && j1-mtr>=0*/){
 			tab.push([i1+mtr,j1-mtr]);
 		}
-		else{	
+		else{
+			if(chessboard[i1+mtr][j1-mtr][0]==opponentsColor){
+				tab.push([i1+mtr,j1-mtr]);
+			}
 			break;
 		}
 		
@@ -254,10 +260,13 @@ function bishop(i1,j1,chessboard, color){
 	
 	while(i1-mtr>=0){
 		
-		if(chessboard[i1-mtr][j1+mtr]==null && j1+mtr<8){
+		if(chessboard[i1-mtr][j1+mtr]==null/* && j1+mtr<8*/){
 			tab.push([i1-mtr,j1+mtr]);
 		}
 		else{
+			if(chessboard[i1-mtr][j1+mtr][0]==opponentsColor){
+				tab.push([i1-mtr,j1+mtr]);
+			}
 			break;
 		}
 		
@@ -270,10 +279,15 @@ function bishop(i1,j1,chessboard, color){
 
 	while(i1-mtr>=0){
 		
-		if(chessboard[i1-mtr][j1-mtr]==null && j1-mtr>=0){
+		if(chessboard[i1-mtr][j1-mtr]==null/* && j1-mtr>=0*/){
 			tab.push([i1-mtr,j1-mtr]);
 		}
-		else{		
+		else{
+		//	console.log('Warning');
+		//	console.log(chessboard[i1-mtr][j1-mtr][0]);
+			if(chessboard[i1-mtr][j1-mtr][0]==opponentsColor){
+				tab.push([i1-mtr,j1-mtr]);
+			}
 			break;
 		}
 		
@@ -296,8 +310,8 @@ function queen(i1,j1,chessboard, color){
 	var tabBishop = [];
 	var tabRook = [];
 	
-	tabBishop = bishop(i1, j1, chessboard);
-	tabRook = rook(i1, j1, chessboard);
+	tabBishop = bishop(i1, j1, chessboard,color);
+	tabRook = rook(i1, j1, chessboard, color);
 	
 	tab = tabBishop.concat(tabRook);
 	
