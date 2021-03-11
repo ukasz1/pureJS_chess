@@ -59,12 +59,28 @@ function pawnW(i1, j1, chessboard, color){
 	
 	var tab = [];
 	
+	var opponentsColor;
+	
+	if(color=='w')
+		opponentsColor='b';
+	else
+		opponentsColor='w';
+	
 	if(i1==0)
 		return tab;
 	if(i1<6){
 		if(chessboard[i1-1][j1]==null){
 			tab.push([i1-1,j1]);
 		}
+		if(j1-1>=0)
+			if(chessboard[i1-1][j1-1]!=null)
+				if(chessboard[i1-1][j1-1][0]==opponentsColor)
+					tab.push([i1-1,j1-1]);
+		
+		if(j1+1<=7)
+			if(chessboard[i1-1][j1+1]!=null)
+				if(chessboard[i1-1][j1+1][0]==opponentsColor)
+					tab.push([i1-1,j1+1]);
 	}
 	else
 		if(chessboard[i1-1][j1]==null){
@@ -74,6 +90,16 @@ function pawnW(i1, j1, chessboard, color){
 				tab.push([i1-2,j1]);
 			}
 		}
+		
+		if(j1-1>=0)
+			if(chessboard[i1-1][j1-1]!=null)
+				if(chessboard[i1-1][j1-1][0]==opponentsColor)
+					tab.push([i1-1,j1-1]);
+		if(j1+1<=7)
+			if(chessboard[i1-1][j1+1]!=null)
+				if(chessboard[i1-1][j1+1][0]==opponentsColor)
+					tab.push([i1-1,j1+1]);
+		
 	console.log(tab);
 	return tab;
 }
@@ -83,6 +109,13 @@ function pawnB(i1, j1, chessboard, color){
 	
 	i1=Number(i1);
 	j1=Number(j1);
+	
+	var opponentsColor;
+	
+	if(color=='w')
+		opponentsColor='b';
+	else
+		opponentsColor='w';
 	
 	var tab = [];
 	
