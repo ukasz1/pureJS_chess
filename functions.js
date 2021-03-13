@@ -125,6 +125,14 @@ function pawnB(i1, j1, chessboard, color){
 		if(chessboard[i1+1][j1]==null){
 			tab.push([i1+1,j1]);
 		}
+		if(j1-1>=0)
+			if(chessboard[i1+1][j1-1]!=null)
+				if(chessboard[i1+1][j1-1][0]==opponentsColor)
+					tab.push([i1+1,j1-1]);
+		if(j1+1<=7)
+			if(chessboard[i1+1][j1+1]!=null)
+				if(chessboard[i1+1][j1+1][0]==opponentsColor)
+					tab.push([i1+1,j1+1]);
 	}
 	else
 		if(chessboard[i1+1][j1]==null){
@@ -134,6 +142,14 @@ function pawnB(i1, j1, chessboard, color){
 				tab.push([i1+2,j1]);
 			}
 		}
+		if(j1-1>=0)
+			if(chessboard[i1+1][j1-1]!=null)
+				if(chessboard[i1+1][j1-1][0]==opponentsColor)
+					tab.push([i1+1,j1-1]);
+		if(j1+1<=7)
+			if(chessboard[i1+1][j1+1]!=null)
+				if(chessboard[i1+1][j1+1][0]==opponentsColor)
+					tab.push([i1+1,j1+1]);
 	console.log(tab);
 	return tab;
 }
