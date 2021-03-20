@@ -8,8 +8,9 @@ The major version pf the app is beta version (index-beta.html and js-beta.js).
 In the future can be expected implementation of the chess engine writen in JavaScript which has to be based on neural networks.
 
 ## Current state
-The graphic layout is completed, but the true challenge is providing the proper moves of the chess pieces. <br />
-Graphic layout - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
+Below there are some steps showing the project completion level:
+- graphic layout &nbsp; - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
+- proper way of moving the pieces &nbsp; - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
 
 ## Application screenshots
 <div>
