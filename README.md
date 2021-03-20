@@ -9,8 +9,8 @@ In the future can be expected implementation of the chess engine writen in JavaS
 
 ## Current state
 Below there are some steps showing the project completion level:
-- graphic layout &nbsp; - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
-- proper way of moving the pieces &nbsp; - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
+- graphic layout - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
+- proper way of moving the pieces - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
 
 ## Application screenshots
 <div>
