@@ -51,6 +51,15 @@ function isMovePossible(el1_arg, el2_arg, taken_arg, chessboard_arg){
 	return false;
 }
 
+//------------------------------- SPRAWDZENIE KOLORU PRZECIWNIKA -------------------------------
+
+function func_OpponentsColor(l_color){
+	if(l_color=='w')
+		return 'b';
+	else
+		return 'w';
+}
+
 //----------------------------------- RUCH PIONA BIAŁEGO ---------------------------------------
 function pawnW(i1, j1, chessboard, color){
 	
@@ -58,13 +67,7 @@ function pawnW(i1, j1, chessboard, color){
 	j1=Number(j1);
 	
 	var tab = [];
-	
-	var opponentsColor;
-	
-	if(color=='w')
-		opponentsColor='b';
-	else
-		opponentsColor='w';
+	var opponentsColor=func_OpponentsColor(color);
 	
 	if(i1==0)
 		return tab;
@@ -110,12 +113,7 @@ function pawnB(i1, j1, chessboard, color){
 	i1=Number(i1);
 	j1=Number(j1);
 	
-	var opponentsColor;
-	
-	if(color=='w')
-		opponentsColor='b';
-	else
-		opponentsColor='w';
+	var opponentsColor=func_OpponentsColor(color);
 	
 	var tab = [];
 	
@@ -163,12 +161,7 @@ function rook(i1,j1,chessboard, color){
 	i1=Number(i1);
 	j1=Number(j1);
 	
-	var opponentsColor;
-	
-	if(color=='w')
-		opponentsColor='b';
-	else
-		opponentsColor='w';
+	var opponentsColor=func_OpponentsColor(color);
 	
 	//Sprawdzenie istnienia pól szachowych
 	var mtr=1;
@@ -264,12 +257,7 @@ function bishop(i1,j1,chessboard, color){
 	i1 = Number(i1);
 	j1 = Number(j1);
 	
-	var opponentsColor;
-	
-	if(color=='w')
-		opponentsColor='b';
-	else
-		opponentsColor='w';
+	var opponentsColor=func_OpponentsColor(color);
 	
 
 	while(i1+mtr<8){
@@ -380,12 +368,7 @@ function king(i1,j1,chessboard, color){
 	i1 = Number(i1);
 	j1 = Number(j1);
 	
-	var opponentsColor;
-	
-	if(color=='w')
-		opponentsColor='b';
-	else
-		opponentsColor='w';
+	var opponentsColor=func_OpponentsColor(color);
 	
 	if(i1-1>=0 && j1-1>=0)
 		if(chessboard[i1-1][j1-1]==null || chessboard[i1-1][j1-1][0]==opponentsColor)
@@ -434,12 +417,7 @@ function knight(i,j,chessboard, color){
 	i = Number(i);
 	j = Number(j);
 	
-	var opponentsColor;
-	
-	if(color=='w')
-		opponentsColor='b';
-	else
-		opponentsColor='w';
+	var opponentsColor=func_OpponentsColor(color);
 
 	if(i-1>=0 && j-2>=0)
 		if(chessboard[i-1][j-2]==null || chessboard[i-1][j-2][0]==opponentsColor)
