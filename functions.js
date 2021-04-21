@@ -455,3 +455,4 @@ function knight(i,j,chessboard, color){
 	console.log(tab);
 	return tab;
 }
+

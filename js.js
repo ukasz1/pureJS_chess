@@ -122,6 +122,7 @@ function markingSecond(e){
 		
 		
 		console.log(chessboard);
+		checkedByWhite(chessboard);	// sprawdzenie szachowanych pól przez białe figury
 		
 		//error=true;
 	}
