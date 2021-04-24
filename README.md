@@ -17,4 +17,6 @@ Below there are some steps showing the project completion level:
 ## Application screenshots
 <div>
   <img src="/Screenshots/szachownica_2.PNG" width="400px"></img>
-</div>
+</div><br />
+This video shows how the algorithm worked at an early stage:
+https://www.youtube.com/watch?v=iV2be-UNH8U&ab_channel=Mulder
