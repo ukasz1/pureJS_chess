@@ -9,10 +9,10 @@ In the future can be expected implementation of the chess engine writen in JavaS
 
 ## Current state
 Below there are some steps showing the project completion level:
-- graphic layout - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
-- proper way of moving the pieces - <img src="https://github.com/ukasz1/useful_files/blob/main/done.svg"></img>
-- check function - <img src="https://github.com/ukasz1/useful_files/blob/main/needed.svg"></img>
-- other functions (<i>en passant</i>, pawn promotion, pin, castling) - <img src="https://github.com/ukasz1/useful_files/blob/main/needed.svg"></img>
+- graphic layout - <img src="https://github.com/ukasz1/pureJS_chess/blob/main/Useful-svg/done.svg"></img>
+- proper way of moving the pieces - <img src="https://github.com/ukasz1/pureJS_chess/blob/main/Useful-svg/done.svg"></img>
+- check function - <img src="https://github.com/ukasz1/pureJS_chess/blob/main/Useful-svg/needed.svg"></img>
+- other functions (<i>en passant</i>, pawn promotion, pin, castling) - <img src="https://github.com/ukasz1/pureJS_chess/blob/main/Useful-svg/needed.svg"></img>
 
 ## Application screenshots
 <div>
